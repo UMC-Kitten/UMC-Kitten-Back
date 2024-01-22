@@ -16,3 +16,8 @@ spring:
     properties:
       hibernate:
         globally_quoted_identifiers: true
+
+jwt:
+  header: Authorization
+  secret: 712f0bc8c7475fdc6e30bd3f81aaba2a7c5c648b398a70b2b53b1d0c63163f4f85de9fcf97da6cbd8742bf02fd4cd5090627ae80e6e5564c20064f264c5dbbf6
+  duration: 30
