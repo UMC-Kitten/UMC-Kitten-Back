@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    dirver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/user
+    username: root
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create
+      show-sql: true # true 설정시 JPA 쿼리문 확인 가능
+      format-sql: true # JPA의 구현체인 Hibernate가 동작하면서 발생하는 SQL의 가독성을 높여준다.
+      generate-ddl: true
+
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
