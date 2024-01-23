@@ -86,7 +86,7 @@ public class PrincipalDetails implements UserDetails {
      */
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     /**
