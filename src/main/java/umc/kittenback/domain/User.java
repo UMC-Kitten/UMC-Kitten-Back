@@ -1,5 +1,8 @@
 package umc.kittenback.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +19,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import umc.kittenback.domain.enums.OAuth2Provider;
+import umc.kittenback.domain.enums.PetType;
 import umc.kittenback.domain.enums.UserRole;
 
 @Entity
@@ -38,8 +43,9 @@ public class User extends BaseEntity{
     @Column(nullable = false)
     private String name;
 
-    // 휴대폰 번호
-    private String phoneNumber;
+    // 사용자 닉네임
+    @Column(nullable = false, unique = true)
+    private String nickname;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
@@ -54,4 +60,11 @@ public class User extends BaseEntity{
 
     // 사용자 이미지
     private String profileImage;
+
+    // 반려동물을 키우고 있는지 여부
+    private Boolean hasPet;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pet> pets = new ArrayList<>();
+
 }
