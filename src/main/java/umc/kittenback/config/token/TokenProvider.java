@@ -1,8 +1,11 @@
 package umc.kittenback.config.token;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
@@ -10,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,6 +29,7 @@ import umc.kittenback.domain.enums.UserRole;
  * JWT 토큰을 생성하고 관리하는 컴포넌트
  */
 @Component
+@Slf4j
 public class TokenProvider {
 
     // 토큰 만료 시간 (밀리초 단위)
@@ -77,12 +82,33 @@ public class TokenProvider {
      * 토큰에서 사용자의 이메일을 추출하여 PrincipalDetails를 로드한 다음,
      * UsernamePasswordAuthenticationToken을 생성하여 반환한다.
      * @param token
-     * @return
+     * @return UsernamePasswordAuthenticationToken
      */
     public Authentication getAuthentication(String token) {
         PrincipalDetails userDetails = (PrincipalDetails) principalDetailsService.loadUserByUsername(this.getUserEmail(token));
 
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+
+    /**
+     * 토큰의 유효성을 검사한다.
+     * @param token
+     * @return
+     */
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return true;
+        } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
+            log.info("잘못된 JWT 서명입니다.");
+        } catch (ExpiredJwtException e) {
+            log.info("만료된 JWT 토큰입니다.");
+        } catch (UnsupportedJwtException e) {
+            log.info("지원되지 않는 JWT 토큰입니다.");
+        } catch (IllegalArgumentException e) {
+            log.info("JWT 토큰이 잘못되었습니다.");
+        }
+        return false;
     }
 
 }
