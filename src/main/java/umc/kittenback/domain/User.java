@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import umc.kittenback.domain.enums.OAuth2Provider;
-import umc.kittenback.domain.enums.PetType;
 import umc.kittenback.domain.enums.UserRole;
 
 @Entity
@@ -66,5 +65,4 @@ public class User extends BaseEntity{
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> pets = new ArrayList<>();
-
 }

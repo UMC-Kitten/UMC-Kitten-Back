@@ -1,14 +1,24 @@
 package umc.kittenback.config.token;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+import umc.kittenback.config.security.PrincipalDetails;
 import umc.kittenback.config.security.PrincipalDetailsService;
+import umc.kittenback.domain.User;
 import umc.kittenback.domain.enums.UserRole;
 
 /**
@@ -52,4 +62,27 @@ public class TokenProvider {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
+
+    // 토큰을 파싱하여 사용자의 이메일(토큰의 subject)을 반환한다
+    public String getUserEmail(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+    }
+
+    /**
+     * 토큰에서 사용자의 이메일을 추출하여 PrincipalDetails를 로드한 다음,
+     * UsernamePasswordAuthenticationToken을 생성하여 반환한다.
+     * @param token
+     * @return
+     */
+    public Authentication getAuthentication(String token) {
+        PrincipalDetails userDetails = (PrincipalDetails) principalDetailsService.loadUserByUsername(this.getUserEmail(token));
+
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+
 }
