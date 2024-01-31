@@ -29,7 +29,6 @@ public class PostResponseDTO {
         LocalDateTime createdAt;
     }
 
-
     @Builder
     @Getter
     @NoArgsConstructor
@@ -37,6 +36,10 @@ public class PostResponseDTO {
     public static class PostPreviewListDTO{
         List<PostPreviewDTO> postList;
         Integer listSize;
+        Integer totalPage;
+        Long totalElements;
+        Boolean isFirst;
+        Boolean isLast;
     }
 
 }

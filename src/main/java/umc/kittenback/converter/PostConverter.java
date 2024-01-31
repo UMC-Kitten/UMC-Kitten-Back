@@ -3,8 +3,10 @@ package umc.kittenback.converter;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
 import umc.kittenback.domain.Post;
-import umc.kittenback.web.dto.PostRequestDTO;
+import umc.kittenback.domain.enums.PostType;
+import umc.kittenback.web.dto.PostRequestDTO.JoinPostDTO;
 import umc.kittenback.web.dto.PostResponseDTO;
 
 public class PostConverter {
@@ -16,14 +18,15 @@ public class PostConverter {
                 .build();
     }
 
-    public static Post toPost(PostRequestDTO.JoinPostDTO post){
+    public static Post toPost(JoinPostDTO post){
         return Post.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
+                .postType(PostType.valueOf(post.getPostType()))
                 .build();
     }
 
-    public static PostResponseDTO.PostPreviewDTO topostPreviewDTO(Post post){
+    public static PostResponseDTO.PostPreviewDTO toPostPreviewDTO(Post post){
         return PostResponseDTO.PostPreviewDTO.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
@@ -31,11 +34,15 @@ public class PostConverter {
                 .build();
     }
 
-    public static PostResponseDTO.PostPreviewListDTO toPostPreviewListDTO(List<Post> postList){
+    public static PostResponseDTO.PostPreviewListDTO toPostPreviewListDTO(Page<Post> postList){
         List<PostResponseDTO.PostPreviewDTO> postPreviewDTOList =  postList.stream()
-                .map(PostConverter::topostPreviewDTO).collect(Collectors.toList());
+                .map(PostConverter::toPostPreviewDTO).collect(Collectors.toList());
 
         return PostResponseDTO.PostPreviewListDTO.builder()
+                .isFirst(postList.isFirst())
+                .isLast(postList.isLast())
+                .totalPage(postList.getTotalPages())
+                .totalElements(postList.getTotalElements())
                 .listSize(postPreviewDTOList.size())
                 .postList(postPreviewDTOList)
                 .build();

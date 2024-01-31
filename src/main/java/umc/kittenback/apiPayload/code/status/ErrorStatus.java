@@ -28,17 +28,8 @@ public enum ErrorStatus implements BaseErrorCode {
     // Ror test
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트"),
 
-    // FoodCategory Error
-    FOOD_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "FOOD_CATEGORY4001", "음식 카테고리가 없습니다."),
-
-    // Store Error
-    STORE_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE4001", "해당하는 가게가 없습니다."),
-
-    // Mission Status Error
-    MISSION_STATUS_NOT_CHALLENGING(HttpStatus.NOT_FOUND, "MISSIONSTATUS4001", "도전 중인 미션이 아닙니다."),
-
-    // Page range Error
-    OUT_OF_PAGE_RANGE(HttpStatus.NOT_FOUND, "PAGERANGE4001", "요청한 페이지가 0보다 작습니다.");
+    // PostType Error
+    POSTTYPE_NOT_FOUND(HttpStatus.NOT_FOUND, "POSTTYPE4001", "해당하는 게시글타입이 없습니다.");
 
 
     private final HttpStatus httpStatus;

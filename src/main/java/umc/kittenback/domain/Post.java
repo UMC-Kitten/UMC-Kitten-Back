@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,8 +35,11 @@ public class Post extends BaseEntity {
     @Column(nullable = false)
     private String title;
 
-    private PostType type;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING) // BOAST, REVIEW, FREE
+    private PostType postType;
 
+    @Column(nullable = false)
     private String content;
 
     // user참조해야함

@@ -19,8 +19,18 @@ public class PostCommandServiceImpl implements PostCommandService {
         return postRepository.save(PostConverter.toPost(req));
     }
 
+    @Override
     public Boolean deletePost(Long postId) {
         postRepository.deleteById(postId);
         return true;
+    }
+
+    @Override
+    public Post updatePost(Long postId, JoinPostDTO req) {
+        Post post = postRepository.findById(postId).get();
+        post.setContent(req.getContent());
+        post.setTitle(req.getTitle());
+
+        return postRepository.save(post);
     }
 }
