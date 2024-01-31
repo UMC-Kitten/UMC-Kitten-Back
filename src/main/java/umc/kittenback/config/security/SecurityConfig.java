@@ -1,4 +1,4 @@
-package umc.kittenback.config.token;
+package umc.kittenback.config.security;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
+import umc.kittenback.config.token.TokenProvider;
 import umc.kittenback.filter.JwtFilter;
 
 @Configuration
@@ -40,6 +41,8 @@ public class SecurityConfig {
                 .csrf().disable()
 
                 .authorizeRequests()
+                // swagger 허용
+                .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 .anyRequest().permitAll()
 
                 .and()
