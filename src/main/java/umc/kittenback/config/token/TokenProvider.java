@@ -52,8 +52,9 @@ public class TokenProvider {
 
     /**
      * 사용자 이메일, 역할을 바탕으로 jwt 토큰 생성
+     *
      * @param email, 토큰의 subject
-     * @param role, 토큰의 claim에 추가
+     * @param role,  토큰의 claim에 추가
      * @return 토큰 생성
      */
     public String createToken(String email, UserRole role) {
@@ -80,19 +81,21 @@ public class TokenProvider {
     }
 
     /**
-     * 토큰에서 사용자의 이메일을 추출하여 PrincipalDetails를 로드한 다음,
-     * UsernamePasswordAuthenticationToken을 생성하여 반환한다.
+     * 토큰에서 사용자의 이메일을 추출하여 PrincipalDetails를 로드한 다음, UsernamePasswordAuthenticationToken을 생성하여 반환한다.
+     *
      * @param token
      * @return UsernamePasswordAuthenticationToken
      */
     public Authentication getAuthentication(String token) {
-        PrincipalDetails userDetails = (PrincipalDetails) principalDetailsService.loadUserByUsername(this.getUserEmail(token));
+        PrincipalDetails userDetails = (PrincipalDetails) principalDetailsService.loadUserByUsername(
+                this.getUserEmail(token));
 
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
     /**
      * 토큰의 유효성을 검사한다.
+     *
      * @param token
      * @return
      */
@@ -111,4 +114,4 @@ public class TokenProvider {
         }
         return false;
     }
- }
+}

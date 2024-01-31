@@ -7,10 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import umc.kittenback.domain.User;
 
 /**
- * User 클래스를 기반으로 PrincipalDetails 클래스를 구현한다.
- * 이 경우, Spring Security의 UserDetails 인터페이스를 구현해야 한다.
- * UesrDetails 인터페이스는 Spring Security가 사용자 정보를 관리하는데 사용하는 주요 인터페이스이다.
- * 이 인터페이스를 구현함으로써, Spring Security 내의 사용자 인증 및 권한 부여 정보를 제공한다.
+ * User 클래스를 기반으로 PrincipalDetails 클래스를 구현한다. 이 경우, Spring Security의 UserDetails 인터페이스를 구현해야 한다. UesrDetails 인터페이스는
+ * Spring Security가 사용자 정보를 관리하는데 사용하는 주요 인터페이스이다. 이 인터페이스를 구현함으로써, Spring Security 내의 사용자 인증 및 권한 부여 정보를 제공한다.
  */
 public class PrincipalDetails implements UserDetails {
 
@@ -22,6 +20,7 @@ public class PrincipalDetails implements UserDetails {
 
     /**
      * 사용자의 권한을 반환한다.
+     *
      * @return 권한 목록
      */
     @Override
@@ -38,6 +37,7 @@ public class PrincipalDetails implements UserDetails {
 
     /**
      * OAuth2 인증을 사용하므로 비밀번호는 관리하지 않는다.
+     *
      * @return
      */
     @Override
@@ -47,6 +47,7 @@ public class PrincipalDetails implements UserDetails {
 
     /**
      * 사용자의 이메일을 반환한다.
+     *
      * @return 사용자 이메일
      */
     public String getEmail() {
@@ -55,6 +56,7 @@ public class PrincipalDetails implements UserDetails {
 
     /**
      * 사용자의 이름을 반환한다.
+     *
      * @return 사용자 이름
      */
     @Override
@@ -64,6 +66,7 @@ public class PrincipalDetails implements UserDetails {
 
     /**
      * 계정이 만료되었는지 여부를 반환한다.
+     *
      * @return true
      */
     @Override
@@ -73,6 +76,7 @@ public class PrincipalDetails implements UserDetails {
 
     /**
      * 계정이 잠겨 있는지 여부를 반환한다.
+     *
      * @return true
      */
     @Override
@@ -82,6 +86,7 @@ public class PrincipalDetails implements UserDetails {
 
     /**
      * 자격 증명이 만료되었는지 여부를 반환한다.
+     *
      * @return true
      */
     @Override
@@ -91,6 +96,7 @@ public class PrincipalDetails implements UserDetails {
 
     /**
      * 계정이 활성화되어 있는지 여부를 반환한다.
+     *
      * @return 사용자의 활성화 여부에 따라
      */
     @Override
