@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class KakaoProfileResponseDto {
 
+    private String email;
     private String nickname;
     private String thumbnail_image_url;
     private String profile_image_url;
