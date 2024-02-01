@@ -15,4 +15,9 @@ public class KittenBackApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KittenBackApplication.class, args);
 	}
+
+	@Bean
+	public BCryptPasswordEncoder encodePwd() {
+		return new BCryptPasswordEncoder();
+	}
 }
