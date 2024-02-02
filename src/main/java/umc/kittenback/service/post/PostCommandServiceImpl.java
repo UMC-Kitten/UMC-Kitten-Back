@@ -30,7 +30,6 @@ public class PostCommandServiceImpl implements PostCommandService {
         Post post = postRepository.findById(postId).get();
         post.setContent(req.getContent());
         post.setTitle(req.getTitle());
-
         return postRepository.save(post);
     }
 }
