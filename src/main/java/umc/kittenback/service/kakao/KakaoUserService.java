@@ -9,8 +9,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -151,10 +149,6 @@ public class KakaoUserService {
                 request,
                 new ParameterizedTypeReference<KakaoResponseDto<KakaoAccountResponseDto>>() {}
         );
-
-        // 로그로 상태 코드와 응답 바디 출력
-        System.out.println("Response Status Code: " + response.getStatusCode());
-        System.out.println("Response Body: " + response.getBody());
 
         if (response.getBody() != null) {
             return response.getBody();

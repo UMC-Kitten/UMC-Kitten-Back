@@ -12,7 +12,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       show-sql: true # true 설정시 JPA 쿼리문 확인 가능
       format-sql: true # JPA의 구현체인 Hibernate가 동작하면서 발생하는 SQL의 가독성을 높여준다.
       generate-ddl: true
@@ -31,4 +31,10 @@ social:
     clientId: d3f3146fcef4a3b95c27cddd2e4782a2
     secret: ddckOyrA0DVQwD39YzxifeRhVSkvXki0
     redirect: http://localhost:8080/login/oauth2/kakao
+
+  naver:
+    clientId: q4yYq9GqZvWRQnbf8S1h
+    secret: NtgmBYXHHQ
+    redirect: http://localhost:8080/login/oauth2/naver
+
 
