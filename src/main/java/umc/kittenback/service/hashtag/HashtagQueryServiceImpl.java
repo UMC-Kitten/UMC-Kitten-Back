@@ -10,11 +10,13 @@ import umc.kittenback.repository.HashtagRepository;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
-public class HashtagQueryServiceImpl {
+@Transactional
+public class HashtagQueryServiceImpl implements HashtagQueryService{
 
     private final HashtagRepository hashtagRepository;
 
+    @Override
+    @Transactional
     public List<Hashtag> getHashList(Post post) {
         List<Hashtag> hashtagList = hashtagRepository.findAllByPost(post);
         return hashtagList;

@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,23 +14,21 @@ import umc.kittenback.service.firebase.FireBaseService;
 @RestController
 @RequiredArgsConstructor
 @Validated
+@RequestMapping("/upload")
 public class TestFileController {
 
     private final FireBaseService fireBaseService;
 
-    @PostMapping("/file")
-    public String uploadFile(@RequestParam("file")MultipartFile file, String fileName) throws IOException {
+    @PostMapping("/{userId}/file")
+    public String uploadFile(@RequestParam("file")MultipartFile file, Long userId) throws IOException {
         if(file.isEmpty()){
             return "empty";
         }
-        return fireBaseService.uploadFile(file, fileName);
+        return fireBaseService.uploadFile(file, userId);
     }
 
-    @PostMapping("files/upload")
-    public  List<String>  uploadFileList(@RequestParam("files")List<MultipartFile> files) throws IOException {
-//        if(files.isEmpty()){
-//            return null;
-//        }
-        return fireBaseService.uploadFiles(files) ;
+    @PostMapping("/{userId}/files")
+    public  List<String>  uploadFileList(@RequestParam("files")List<MultipartFile> files, Long userId) throws IOException {
+        return fireBaseService.uploadFiles(files, userId) ;
     }
 }
