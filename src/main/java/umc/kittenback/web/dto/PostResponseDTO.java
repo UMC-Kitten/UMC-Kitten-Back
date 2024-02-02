@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import umc.kittenback.domain.Comment;
-
+import umc.kittenback.domain.Hashtag;
 
 public class PostResponseDTO {
 
@@ -30,6 +30,7 @@ public class PostResponseDTO {
         String content;
         LocalDateTime createdAt;
         CommentResponseDTO.CommentPreviewListDTO commentPreviewListDTO;
+        List<Hashtag> hashtagList;
     }
 
     @Builder

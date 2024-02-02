@@ -1,5 +1,6 @@
 package umc.kittenback.web.dto;
 
+import java.util.List;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import umc.kittenback.domain.enums.PostType;
@@ -12,9 +13,10 @@ public class PostRequestDTO {
         String title;
 //        @NotBlank
         String content;
-
         @NotBlank
         String postType;
+
+        List<String> hashtagList;
 
     }
 

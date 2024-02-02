@@ -6,7 +6,7 @@ import umc.kittenback.web.dto.CommentRequestDTO.JoinCommentDTO;
 
 public interface CommentCommandService {
 
-    Comment joinComment(Long postId, JoinCommentDTO req);
+    Comment joinComment(Long userId, Long postId, JoinCommentDTO req);
 
     Boolean deleteComment(Long commentId);
 

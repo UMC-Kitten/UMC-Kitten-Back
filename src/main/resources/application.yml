@@ -5,6 +5,10 @@ spring:
     username: root
     password: root3796
 
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
@@ -22,6 +26,12 @@ jwt:
   secret: 712f0bc8c7475fdc6e30bd3f81aaba2a7c5c648b398a70b2b53b1d0c63163f4f85de9fcf97da6cbd8742bf02fd4cd5090627ae80e6e5564c20064f264c5dbbf6
   duration: 30
 
+social:
+  kakao:
+      clientId: d3f3146fcef4a3b95c27cddd2e4782a2
+      secret: ddckOyrA0DVQwD39YzxifeRhVSkvXki0
+      redirect: http://localhost:8080/login/oauth2/kakao
+
 app:
   firebase-configuration-file: ./serviceAccountKey.json
-  firebase-bucket: est-ecbc5.appspot.com
+  firebase-bucket: test-ecbc5.appspot.com

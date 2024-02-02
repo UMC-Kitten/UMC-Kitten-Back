@@ -38,7 +38,7 @@ public class CommentController {
     private final CommentCommandServiceImpl commentCommandService;
 
     // 댓글 등록
-    @PostMapping("/{postId}/comment")
+    @PostMapping("/{postId}/{userId}/comment")
     @Operation(summary = "댓글 등록 API",description = "댓글을 등록하는 API입니다.")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
@@ -46,8 +46,12 @@ public class CommentController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
-    public ApiResponse<CommentResponseDTO.JoinCommentResultDTO> joinComment(@PathVariable(name = "postId") Long postId, @RequestBody @Valid CommentRequestDTO.JoinCommentDTO req){
-        Comment comment = commentCommandService.joinComment(postId, req);
+    @Parameters({
+            @Parameter(name = "postId", description = "댓글 고유번호, path variable 입니다!"),
+            @Parameter(name = "userId", description = "사용자 고유번호(댓글 작성자), path variable 입니다!")
+    })
+    public ApiResponse<CommentResponseDTO.JoinCommentResultDTO> joinComment(@PathVariable(name = "userId") Long userId, @PathVariable(name = "postId") Long postId, @RequestBody @Valid CommentRequestDTO.JoinCommentDTO req){
+        Comment comment = commentCommandService.joinComment(userId, postId, req);
         return ApiResponse.onSuccess(CommentConverter.toJoinCommentResultDTO(comment));
     }
 

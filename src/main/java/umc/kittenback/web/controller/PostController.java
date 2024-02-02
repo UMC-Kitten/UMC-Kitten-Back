@@ -24,8 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import umc.kittenback.apiPayload.ApiResponse;
 import umc.kittenback.converter.PostConverter;
+import umc.kittenback.domain.Hashtag;
 import umc.kittenback.domain.Post;
 import umc.kittenback.domain.enums.PostType;
+import umc.kittenback.service.hashtag.HashtagCommandServiceImpl;
+import umc.kittenback.service.hashtag.HashtagQueryServiceImpl;
 import umc.kittenback.service.post.PostCommandServiceImpl;
 import umc.kittenback.service.post.PostQueryServiceImpl;
 import umc.kittenback.web.dto.PostRequestDTO;
@@ -39,9 +42,11 @@ public class PostController {
 
     private final PostCommandServiceImpl postCommandService;
     private final PostQueryServiceImpl postQueryService;
+    private final HashtagCommandServiceImpl hashtagCommandService;
+    private final HashtagQueryServiceImpl hashtagQueryService;
 
     // 게시글 등록
-    @PostMapping("/post")
+    @PostMapping("/{userId}/post")
     @Operation(summary = "게시글 등록 API",description = "게시글을 등록하는 API입니다.")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
@@ -49,8 +54,12 @@ public class PostController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
-    public ApiResponse<PostResponseDTO.JoinPostResultDTO> joinPost(@RequestBody @Valid PostRequestDTO.JoinPostDTO req){
-        Post post = postCommandService.joinPost(req);
+    @Parameters({
+            @Parameter(name = "userId", description = "사용자 고유번호, path variable 입니다!")
+    })
+    public ApiResponse<PostResponseDTO.JoinPostResultDTO> joinPost(@PathVariable(name = "userId") Long userId, @RequestBody @Valid PostRequestDTO.JoinPostDTO req){
+        Post post = postCommandService.joinPost(userId, req);
+        List<Hashtag> Hashtags = hashtagCommandService.joinHashtag(post, req.getHashtagList());
         return ApiResponse.onSuccess(PostConverter.toJoinPostResultDTO(post));
     }
 
@@ -71,23 +80,6 @@ public class PostController {
         Page<Post> postList = postQueryService.getPostList(postType, page-1);
         return ApiResponse.onSuccess(PostConverter.toPostPreviewListDTO(postList));
     }
-
-    // 게시글 불러오기
-//    @GetMapping("/board/{postId}")
-//    @Operation(summary = "게시글 조회 API",description = "게시판 별 게시글을 조회하는 API입니다. query String 으로 게시글 고유번호를 주세요")
-//    @ApiResponses({
-//            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
-//            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-//            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-//            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
-//    })
-//    @Parameters({
-//            @Parameter(name = "postId", description = "게시글 고유번호, path variable 입니다!")
-//    })
-//    public ApiResponse<PostResponseDTO.PostPreviewDTO> getPost(@PathVariable(name = "postId") Long postId ){
-//        Post post = postQueryService.getPost(postId);
-//        return ApiResponse.onSuccess(PostConverter.toPostPreviewDTO(post));
-//    }
 
     // 게시글 삭제
     @DeleteMapping("/{postId}")
@@ -127,6 +119,7 @@ public class PostController {
     })
     public ApiResponse<PostResponseDTO.PostPreviewDTO> getPost(@PathVariable(name = "postId") Long postId ){
         Post post = postQueryService.getPost(postId);
+        List<Hashtag> hashtagList = hashtagQueryService.getHashList(post);
         return ApiResponse.onSuccess(PostConverter.toPostPreviewDTO(post));
     }
 

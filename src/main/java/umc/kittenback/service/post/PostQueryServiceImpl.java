@@ -11,16 +11,18 @@ import umc.kittenback.repository.PostRepository;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class PostQueryServiceImpl implements PostQueryService{
 
     private final PostRepository postRepository;
     @Override
+    @Transactional
     public Page<Post> getPostList(PostType postType, Integer page) {
         return postRepository.findAllByPostType(postType, PageRequest.of(page, 10));
     }
 
     @Override
+    @Transactional
     public Post getPost(Long postId) {
         return postRepository.findById(postId).get();
     }

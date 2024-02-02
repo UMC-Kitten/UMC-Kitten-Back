@@ -9,7 +9,7 @@ import umc.kittenback.repository.PostRepository;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class CommendQueryServiceImpl implements CommentQueryService{
+public class CommentQueryServiceImpl implements CommentQueryService{
 
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;

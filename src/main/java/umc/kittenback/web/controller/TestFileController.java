@@ -1,6 +1,7 @@
 package umc.kittenback.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +17,19 @@ public class TestFileController {
 
     private final FireBaseService fireBaseService;
 
-    @PostMapping("/files")
+    @PostMapping("/file")
     public String uploadFile(@RequestParam("file")MultipartFile file, String fileName) throws IOException {
         if(file.isEmpty()){
             return "empty";
         }
-        return fireBaseService.uploadFiles(file, fileName);
+        return fireBaseService.uploadFile(file, fileName);
+    }
+
+    @PostMapping("files/upload")
+    public  List<String>  uploadFileList(@RequestParam("files")List<MultipartFile> files) throws IOException {
+//        if(files.isEmpty()){
+//            return null;
+//        }
+        return fireBaseService.uploadFiles(files) ;
     }
 }

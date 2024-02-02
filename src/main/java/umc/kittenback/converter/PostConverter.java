@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
+import umc.kittenback.domain.Hashtag;
 import umc.kittenback.domain.Post;
+import umc.kittenback.domain.User;
 import umc.kittenback.domain.enums.PostType;
 
 import umc.kittenback.web.dto.CommentResponseDTO;
@@ -17,16 +19,16 @@ public class PostConverter {
     public static PostResponseDTO.JoinPostResultDTO toJoinPostResultDTO(Post post){
         return PostResponseDTO.JoinPostResultDTO.builder()
                 .postId(post.getId())
-
                 .createdAt(post.getCreatedAt())
                 .build();
     }
 
-    public static Post toPost(JoinPostDTO post){
+    public static Post toPost(User user, JoinPostDTO post){
         return Post.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
                 .postType(PostType.valueOf(post.getPostType()))
+                .user(user)
                 .build();
     }
 
@@ -38,6 +40,7 @@ public class PostConverter {
                 .content(post.getContent())
                 .createdAt(post.getCreatedAt())
                 .commentPreviewListDTO(commentPreviewListDTO)
+//                .hashtagList(hashtagList)
                 .build();
     }
 
