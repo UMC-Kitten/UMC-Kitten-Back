@@ -40,6 +40,7 @@ public class SecurityConfig {
                 .csrf().disable()
 
                 .authorizeRequests()
+                .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 .anyRequest().permitAll()
 
                 .and()
@@ -49,3 +50,4 @@ public class SecurityConfig {
     }
 
 }
+
