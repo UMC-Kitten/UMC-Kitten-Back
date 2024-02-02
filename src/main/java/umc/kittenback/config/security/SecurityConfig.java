@@ -39,6 +39,7 @@ public class SecurityConfig {
                 // swagger 허용
                 .antMatchers("/swagger-ui/**", "/api-docs/**", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**").permitAll()
                 .antMatchers("/api/v1/kakao/**", "/kakao").permitAll()
+                .antMatchers("/api/v1/naver/**", "/naver").permitAll()
                 .anyRequest().permitAll()
 
                 .and()

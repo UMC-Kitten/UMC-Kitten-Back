@@ -30,7 +30,7 @@ public enum ErrorStatus implements BaseErrorCode {
         return ErrorReasonDTO.builder()
                 .message(message)
                 .code(code)
-                .isSuccess(true)
+                .isSuccess(false)
                 .build();
     }
 
@@ -39,7 +39,7 @@ public enum ErrorStatus implements BaseErrorCode {
         return ErrorReasonDTO.builder()
                 .message(message)
                 .code(code)
-                .isSuccess(true)
+                .isSuccess(false)
                 .httpStatus(httpStatus)
                 .build();
     }
