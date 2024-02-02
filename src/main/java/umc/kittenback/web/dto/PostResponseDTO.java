@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import umc.kittenback.domain.Comment;
 
+
 public class PostResponseDTO {
 
     @Builder
@@ -43,6 +44,5 @@ public class PostResponseDTO {
         Boolean isFirst;
         Boolean isLast;
     }
-
 
 }

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import umc.kittenback.domain.Post;
 import umc.kittenback.domain.enums.PostType;
+
 import umc.kittenback.web.dto.CommentResponseDTO;
 import umc.kittenback.web.dto.CommentResponseDTO.CommentPreviewListDTO;
 import umc.kittenback.web.dto.PostRequestDTO.JoinPostDTO;
@@ -16,6 +17,7 @@ public class PostConverter {
     public static PostResponseDTO.JoinPostResultDTO toJoinPostResultDTO(Post post){
         return PostResponseDTO.JoinPostResultDTO.builder()
                 .postId(post.getId())
+
                 .createdAt(post.getCreatedAt())
                 .build();
     }
