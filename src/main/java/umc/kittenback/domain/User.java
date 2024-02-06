@@ -66,6 +66,12 @@ public class User extends BaseEntity{
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> pets = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
@@ -73,4 +79,5 @@ public class User extends BaseEntity{
         this.hasPet = hasPet;
     }
     public void setProfileImage(String profileImage) { this.profileImage = profileImage; }
+
 }
