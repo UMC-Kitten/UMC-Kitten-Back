@@ -1,7 +1,9 @@
 package umc.kittenback.controller;
 
+import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +27,7 @@ public class UserController {
 
 
     @GetMapping("/kakao")
-    public ApiResponse<UserLoginResponseDto> kakaoLogin(@RequestParam("code")String code){
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("code")String code){
         // Set Hedaer
         HttpHeaders httpHeaders = new HttpHeaders();
         String token = kakaoUserService.kakaoLogin(code);
@@ -33,17 +35,25 @@ public class UserController {
         httpHeaders.add("Authorization", "Bearer " + token);
         UserLoginResponseDto loginResponseDto = userService.login(tokenProvider.getUserEmail(token));
 
-        return ApiResponse.onSuccess(loginResponseDto);
+        ApiResponse<UserLoginResponseDto> apiResponse = ApiResponse.onSuccess(loginResponseDto);
+
+        return ResponseEntity.ok()
+                .headers(httpHeaders)
+                .body(apiResponse);
     }
 
     @GetMapping("/naver")
-    public ApiResponse<UserLoginResponseDto> naverLogin(@RequestParam("code")String code) {
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> naverLogin(@RequestParam("code")String code) {
         HttpHeaders httpHeaders = new HttpHeaders();
         String token = naverUserService.naverLogin(code);
 
         httpHeaders.add("Authorization", "Bearer " + token);
         UserLoginResponseDto loginResponseDto = userService.login(tokenProvider.getUserEmail(token));
 
-        return ApiResponse.onSuccess(loginResponseDto);
+        ApiResponse<UserLoginResponseDto> apiResponse = ApiResponse.onSuccess(loginResponseDto);
+
+        return ResponseEntity.ok()
+                .headers(httpHeaders)
+                .body(apiResponse);
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -30,7 +29,6 @@ public class NaverUserService {
     private final String NAVER_TOKEN_REQUEST_URL = "https://nid.naver.com/oauth2.0/token";
     private final String NAVER_PROFILE_REQUEST_URL = "https://openapi.naver.com/v1/nid/me";
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserRepository userRepository;
 
     private final TokenProvider tokenProvider;

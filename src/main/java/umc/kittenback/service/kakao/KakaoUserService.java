@@ -69,7 +69,6 @@ public class KakaoUserService {
         } else {
 
             // 4-2. 사용자가 없으면 새로 회원가입을 진행한다.
-//            String password = bCryptPasswordEncoder.encode("tbookSecret"); // 임의의 패스워드
             Long providerId = kakaoResponseDto.getId(); // 카카오 공급자 ID
 
             // 4-2-1. 새로운 유저를 생성한다.
@@ -130,7 +129,7 @@ public class KakaoUserService {
      * 발급된 access_token으로 유저 프로필 정보를 가져온다.
      *
      * @param accessToken
-     * @return 유저 프로필을 담은 GoogleProfileResponse 객체
+     * @return 유저 프로필을 담은 KakaoAccountResponseDto 객체
      */
     public KakaoResponseDto<KakaoAccountResponseDto> getUserInfo(String accessToken) {
 
