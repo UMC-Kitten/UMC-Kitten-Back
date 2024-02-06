@@ -71,4 +71,13 @@ public class User extends BaseEntity{
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    public void setHasPet(Boolean hasPet) {
+        this.hasPet = hasPet;
+    }
+    public void setProfileImage(String profileImage) { this.profileImage = profileImage; }
+
 }
