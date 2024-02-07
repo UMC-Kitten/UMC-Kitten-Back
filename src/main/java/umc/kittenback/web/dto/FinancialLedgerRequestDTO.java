@@ -1,8 +1,10 @@
 package umc.kittenback.web.dto;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.NotBlank;
+import lombok.Data;
 import lombok.Getter;
 
 public class FinancialLedgerRequestDTO {
@@ -19,7 +21,7 @@ public class FinancialLedgerRequestDTO {
         Long cost;
 
         @NotBlank
-        LocalDateTime date;
+        Date date;
 
         @NotBlank
         String recordType;

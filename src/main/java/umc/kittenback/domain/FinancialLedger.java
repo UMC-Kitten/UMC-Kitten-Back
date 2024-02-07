@@ -46,7 +46,7 @@ public class FinancialLedger extends BaseEntity{
     private Long cost;
 
     @Column(nullable = false)
-    private LocalDateTime date;
+    private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

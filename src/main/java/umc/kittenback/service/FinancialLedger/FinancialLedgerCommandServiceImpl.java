@@ -35,4 +35,15 @@ public class FinancialLedgerCommandServiceImpl implements FinancialLedgerCommand
         financialLedger.setRecordType(RecordType.valueOf(req.getRecordType()));
         return financialLedgerRepository.save(financialLedger);
     }
+
+    @Override
+    public Boolean deleteFinancialLedger(Long financialLedgerId) {
+        try{
+            financialLedgerRepository.deleteById(financialLedgerId);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

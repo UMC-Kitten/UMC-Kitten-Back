@@ -12,7 +12,6 @@ import umc.kittenback.domain.enums.PostType;
 
 import umc.kittenback.web.dto.CommentResponseDTO;
 import umc.kittenback.web.dto.CommentResponseDTO.CommentPreviewListDTO;
-import umc.kittenback.web.dto.FinancialLedgerResponseDTO.JoinPostResultDTO;
 import umc.kittenback.web.dto.PostRequestDTO.JoinPostDTO;
 import umc.kittenback.web.dto.PostResponseDTO;
 

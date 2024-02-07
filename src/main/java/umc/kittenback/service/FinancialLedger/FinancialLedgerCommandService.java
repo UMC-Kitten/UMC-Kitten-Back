@@ -7,4 +7,6 @@ public interface FinancialLedgerCommandService {
     FinancialLedger joinFinancialLedger(Long userId, JoinFinancialLedgerDTO req);
 
     FinancialLedger updateFinancialLedger(Long financialLedgerId, JoinFinancialLedgerDTO req);
+
+    Boolean deleteFinancialLedger(Long financialLedgerId);
 }
