@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
+import umc.kittenback.domain.FinancialLedger;
 import umc.kittenback.domain.Hashtag;
 import umc.kittenback.domain.Post;
 import umc.kittenback.domain.User;
@@ -11,6 +12,7 @@ import umc.kittenback.domain.enums.PostType;
 
 import umc.kittenback.web.dto.CommentResponseDTO;
 import umc.kittenback.web.dto.CommentResponseDTO.CommentPreviewListDTO;
+import umc.kittenback.web.dto.FinancialLedgerResponseDTO.JoinPostResultDTO;
 import umc.kittenback.web.dto.PostRequestDTO.JoinPostDTO;
 import umc.kittenback.web.dto.PostResponseDTO;
 
@@ -57,4 +59,5 @@ public class PostConverter {
                 .postList(postPreviewDTOList)
                 .build();
     }
+
 }

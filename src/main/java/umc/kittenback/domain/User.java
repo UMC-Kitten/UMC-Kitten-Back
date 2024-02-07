@@ -71,6 +71,10 @@ public class User extends BaseEntity{
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FinancialLedger> financialLedgers = new ArrayList<>();
+
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
