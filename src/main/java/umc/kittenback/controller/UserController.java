@@ -1,6 +1,5 @@
 package umc.kittenback.controller;
 
-import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,6 @@ public class UserController {
     private final UserServiceImpl userService;
     private final TokenProvider tokenProvider;
     private final NaverUserService naverUserService;
-
 
     @GetMapping("/kakao")
     public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("code")String code){

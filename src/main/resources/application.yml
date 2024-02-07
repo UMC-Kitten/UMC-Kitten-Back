@@ -38,6 +38,10 @@ social:
     redirect: http://localhost:8080/login/oauth2/naver
 
   apple:
-    clientId:
+    iss: https://appleid.apple.com
+    clientId: com.together.ryuwon.together
+
+
+
 
 
