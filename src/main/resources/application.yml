@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/user
     username: root
-    password:
+    password: root3796
 
   mvc:
     pathmatch:
@@ -28,23 +28,12 @@ jwt:
 
 social:
   kakao:
-    clientId: d3f3146fcef4a3b95c27cddd2e4782a2
-    secret: ddckOyrA0DVQwD39YzxifeRhVSkvXki0
-    redirect: http://localhost:8080/login/oauth2/kakao
+      clientId: d3f3146fcef4a3b95c27cddd2e4782a2
+      secret: ddckOyrA0DVQwD39YzxifeRhVSkvXki0
+      redirect: http://localhost:8080/login/oauth2/kakao
 
   naver:
     clientId: q4yYq9GqZvWRQnbf8S1h
     secret: NtgmBYXHHQ
     redirect: http://localhost:8080/login/oauth2/naver
-
-  apple:
-    iss: https://appleid.apple.com
-    clientId: com.together.ryuwon.together
-
-app:
-  firebase-configuration-file: ./serviceAccountKey.json
-  firebase-bucket: test-ecbc5.appspot.com
-
-
-
 
