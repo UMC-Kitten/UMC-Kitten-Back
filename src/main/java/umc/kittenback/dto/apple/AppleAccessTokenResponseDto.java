@@ -15,6 +15,5 @@ public class AppleAccessTokenResponseDto {
     private String id_token;
     private String refresh_token;
     private String token_type;
-    private String error;
 
 }
