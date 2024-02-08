@@ -37,3 +37,10 @@ social:
     secret: NtgmBYXHHQ
     redirect: http://localhost:8080/login/oauth2/naver
 
+  apple:
+    iss: https://appleid.apple.com
+    client-id: com.together.ryuwon.together
+
+app:
+  firebase-configuration-file: ./serviceAccountKey.json
+  firebase-bucket: test-ecbc5.appspot.com
