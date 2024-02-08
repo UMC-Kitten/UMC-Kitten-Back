@@ -1,8 +1,7 @@
 package umc.kittenback.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
+import java.time.LocalDateTime;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import umc.kittenback.domain.common.BaseEntity;
-import umc.kittenback.domain.enums.PostType;
+import umc.kittenback.domain.enums.RecordType;
 
 @Entity
 @Getter
@@ -29,36 +27,31 @@ import umc.kittenback.domain.enums.PostType;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Post extends BaseEntity {
+public class FinancialLedger extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING) // FOOD, HOSPITAL, BEAUTY, SPARETIME, ETC
+    private RecordType recordType;
+
+    @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING) // BOAST, REVIEW, FREE
-    private PostType postType;
-
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String content;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comment> commentList = new ArrayList<>();
+    @Column(nullable = false)
+    private Long cost;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Hashtag> hashtagList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostImage> imageList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Like> likeList = new ArrayList<>();
+    @Column(nullable = false)
+    private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
 
 }

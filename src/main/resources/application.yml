@@ -32,6 +32,11 @@ social:
       secret: ddckOyrA0DVQwD39YzxifeRhVSkvXki0
       redirect: http://localhost:8080/login/oauth2/kakao
 
+  naver:
+    clientId: q4yYq9GqZvWRQnbf8S1h
+    secret: NtgmBYXHHQ
+    redirect: http://localhost:8080/login/oauth2/naver
+
 app:
   firebase-configuration-file: ./serviceAccountKey.json
   firebase-bucket: test-ecbc5.appspot.com
