@@ -1,6 +1,6 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    dirver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/user
     username: root
     password: root3796
@@ -37,3 +37,11 @@ social:
     secret: NtgmBYXHHQ
     redirect: http://localhost:8080/login/oauth2/naver
 
+app:
+  firebase-configuration-file: ./serviceAccountKey.json
+  firebase-bucket: test-ecbc5.appspot.com
+  
+ naver:
+    clientId: q4yYq9GqZvWRQnbf8S1h
+    secret: NtgmBYXHHQ
+    redirect: http://localhost:8080/login/oauth2/naver
