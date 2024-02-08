@@ -85,4 +85,5 @@ public class User extends BaseEntity{
         this.hasPet = hasPet;
     }
     public void setProfileImage(String profileImage) { this.profileImage = profileImage; }
+
 }
