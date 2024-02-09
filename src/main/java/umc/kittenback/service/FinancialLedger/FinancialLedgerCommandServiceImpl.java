@@ -9,7 +9,7 @@ import umc.kittenback.domain.User;
 import umc.kittenback.domain.enums.RecordType;
 import umc.kittenback.repository.FinancialLedgerRepository;
 import umc.kittenback.repository.UserRepository;
-import umc.kittenback.web.dto.FinancialLedgerRequestDTO.JoinFinancialLedgerDTO;
+import umc.kittenback.dto.FinancialLedger.FinancialLedgerRequestDTO.JoinFinancialLedgerDTO;
 
 @Service
 @RequiredArgsConstructor

@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 import umc.kittenback.domain.FinancialLedger;
 import umc.kittenback.domain.User;
 import umc.kittenback.domain.enums.RecordType;
-import umc.kittenback.web.dto.FinancialLedgerRequestDTO.JoinFinancialLedgerDTO;
-import umc.kittenback.web.dto.FinancialLedgerResponseDTO;
-import umc.kittenback.web.dto.FinancialLedgerResponseDTO.FinancialLedgerPreviewListDTO;
+import umc.kittenback.dto.FinancialLedger.FinancialLedgerRequestDTO.JoinFinancialLedgerDTO;
+import umc.kittenback.dto.FinancialLedger.FinancialLedgerResponseDTO;
+import umc.kittenback.dto.FinancialLedger.FinancialLedgerResponseDTO.FinancialLedgerPreviewListDTO;
 
 public class FinancialLedgerConverter {
     public static FinancialLedger toFinancialLedger(User user, JoinFinancialLedgerDTO req) {

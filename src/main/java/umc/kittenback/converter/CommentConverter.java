@@ -2,15 +2,11 @@ package umc.kittenback.converter;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.data.domain.Page;
 import umc.kittenback.domain.Comment;
 import umc.kittenback.domain.Post;
 import umc.kittenback.domain.User;
-import umc.kittenback.web.dto.CommentRequestDTO;
-import umc.kittenback.web.dto.CommentResponseDTO;
-import umc.kittenback.web.dto.CommentResponseDTO.JoinCommentResultDTO;
-import umc.kittenback.web.dto.PostResponseDTO;
-import umc.kittenback.web.dto.PostResponseDTO.PostPreviewDTO;
+import umc.kittenback.dto.comment.CommentRequestDTO;
+import umc.kittenback.dto.comment.CommentResponseDTO;
 
 public class CommentConverter {
 
@@ -25,14 +21,14 @@ public class CommentConverter {
     public static CommentResponseDTO.JoinCommentResultDTO toJoinCommentResultDTO(Comment comment) {
         return CommentResponseDTO.JoinCommentResultDTO.builder()
                 .commentId(comment.getId())
-                .createdAt(comment.getCreatedAt())
+                .createdAt(comment.getCreateDate())
                 .build();
     }
 
     public static CommentResponseDTO.CommentPreviewDTO toCommentPreviewDTO(Comment comment) {
         return CommentResponseDTO.CommentPreviewDTO.builder()
                 .content(comment.getContent())
-                .createdAt(comment.getCreatedAt())
+                .createdAt(comment.getCreateDate())
                 .build();
     }
 

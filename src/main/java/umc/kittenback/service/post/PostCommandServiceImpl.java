@@ -8,7 +8,7 @@ import umc.kittenback.domain.Post;
 import umc.kittenback.domain.User;
 import umc.kittenback.repository.PostRepository;
 import umc.kittenback.repository.UserRepository;
-import umc.kittenback.web.dto.PostRequestDTO.JoinPostDTO;
+import umc.kittenback.dto.post.PostRequestDTO.JoinPostDTO;
 
 @Service
 @RequiredArgsConstructor

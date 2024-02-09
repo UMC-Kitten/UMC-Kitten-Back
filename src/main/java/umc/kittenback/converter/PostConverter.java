@@ -1,26 +1,22 @@
 package umc.kittenback.converter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
-import umc.kittenback.domain.FinancialLedger;
-import umc.kittenback.domain.Hashtag;
 import umc.kittenback.domain.Post;
 import umc.kittenback.domain.User;
 import umc.kittenback.domain.enums.PostType;
 
-import umc.kittenback.web.dto.CommentResponseDTO;
-import umc.kittenback.web.dto.CommentResponseDTO.CommentPreviewListDTO;
-import umc.kittenback.web.dto.PostRequestDTO.JoinPostDTO;
-import umc.kittenback.web.dto.PostResponseDTO;
+import umc.kittenback.dto.comment.CommentResponseDTO;
+import umc.kittenback.dto.post.PostRequestDTO.JoinPostDTO;
+import umc.kittenback.dto.post.PostResponseDTO;
 
 public class PostConverter {
 
     public static PostResponseDTO.JoinPostResultDTO toJoinPostResultDTO(Post post){
         return PostResponseDTO.JoinPostResultDTO.builder()
                 .postId(post.getId())
-                .createdAt(post.getCreatedAt())
+                .createdAt(post.getCreateDate())
                 .build();
     }
 
@@ -39,7 +35,7 @@ public class PostConverter {
         return PostResponseDTO.PostPreviewDTO.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
-                .createdAt(post.getCreatedAt())
+                .createdAt(post.getCreateDate())
                 .commentPreviewListDTO(commentPreviewListDTO)
 //                .hashtagList(hashtagList)
                 .build();

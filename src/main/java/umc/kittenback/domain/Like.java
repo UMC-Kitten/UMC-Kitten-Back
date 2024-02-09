@@ -32,6 +32,6 @@ public class Like extends BaseEntity {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "post_id")
     private Post post;
 }

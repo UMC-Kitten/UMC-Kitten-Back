@@ -2,7 +2,7 @@ package umc.kittenback.service.comment;
 
 
 import umc.kittenback.domain.Comment;
-import umc.kittenback.web.dto.CommentRequestDTO.JoinCommentDTO;
+import umc.kittenback.dto.comment.CommentRequestDTO.JoinCommentDTO;
 
 public interface CommentCommandService {
 

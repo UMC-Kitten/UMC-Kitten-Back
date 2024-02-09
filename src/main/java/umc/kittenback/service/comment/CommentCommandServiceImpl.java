@@ -10,7 +10,7 @@ import umc.kittenback.domain.User;
 import umc.kittenback.repository.CommentRepository;
 import umc.kittenback.repository.PostRepository;
 import umc.kittenback.repository.UserRepository;
-import umc.kittenback.web.dto.CommentRequestDTO.JoinCommentDTO;
+import umc.kittenback.dto.comment.CommentRequestDTO.JoinCommentDTO;
 
 @Service
 @RequiredArgsConstructor

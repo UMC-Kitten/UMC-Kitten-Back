@@ -1,8 +1,7 @@
 package umc.kittenback.service.post;
 
-import org.springframework.transaction.annotation.Transactional;
 import umc.kittenback.domain.Post;
-import umc.kittenback.web.dto.PostRequestDTO.JoinPostDTO;
+import umc.kittenback.dto.post.PostRequestDTO.JoinPostDTO;
 
 public interface PostCommandService {
 

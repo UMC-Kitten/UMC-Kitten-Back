@@ -2,7 +2,6 @@ package umc.kittenback.validation.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import umc.kittenback.apiPayload.code.status.ErrorStatus;
 import umc.kittenback.domain.enums.PostType;
 import umc.kittenback.validation.annotation.ExistPostType;
 

@@ -9,7 +9,6 @@ import umc.kittenback.domain.FinancialLedger;
 import umc.kittenback.domain.User;
 import umc.kittenback.repository.FinancialLedgerRepository;
 import umc.kittenback.repository.UserRepository;
-import umc.kittenback.web.dto.FinancialLedgerResponseDTO.FinancialLedgerPreviewDTO;
 
 @Service
 @RequiredArgsConstructor

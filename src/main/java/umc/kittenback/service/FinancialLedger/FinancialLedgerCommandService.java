@@ -1,7 +1,7 @@
 package umc.kittenback.service.FinancialLedger;
 
 import umc.kittenback.domain.FinancialLedger;
-import umc.kittenback.web.dto.FinancialLedgerRequestDTO.JoinFinancialLedgerDTO;
+import umc.kittenback.dto.FinancialLedger.FinancialLedgerRequestDTO.JoinFinancialLedgerDTO;
 
 public interface FinancialLedgerCommandService {
     FinancialLedger joinFinancialLedger(Long userId, JoinFinancialLedgerDTO req);

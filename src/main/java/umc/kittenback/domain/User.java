@@ -18,6 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import umc.kittenback.domain.common.BaseEntity;
 import umc.kittenback.domain.enums.OAuth2Provider;
 import umc.kittenback.domain.enums.UserRole;
 
@@ -28,7 +29,7 @@ import umc.kittenback.domain.enums.UserRole;
 @AllArgsConstructor
 @DynamicInsert
 @DynamicUpdate
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

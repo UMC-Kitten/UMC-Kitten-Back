@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import umc.kittenback.domain.FinancialLedger;
 import umc.kittenback.domain.User;
-import umc.kittenback.web.dto.FinancialLedgerResponseDTO.FinancialLedgerPreviewDTO;
 
 public interface FinancialLedgerRepository extends JpaRepository<FinancialLedger, Long> {
 

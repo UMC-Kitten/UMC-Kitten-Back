@@ -1,6 +1,5 @@
 package umc.kittenback.controller;
 
-import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import umc.kittenback.config.token.TokenProvider;
 import umc.kittenback.dto.user.UserLoginResponseDto;
 import umc.kittenback.response.ApiResponse;
-import umc.kittenback.service.apple.AppleUserService;
-import umc.kittenback.service.kakao.KakaoUserService;
-import umc.kittenback.service.naver.NaverUserService;
+import umc.kittenback.service.social.apple.AppleUserService;
+import umc.kittenback.service.social.kakao.KakaoUserService;
+import umc.kittenback.service.social.naver.NaverUserService;
 import umc.kittenback.service.user.UserServiceImpl;
 
 @RestController

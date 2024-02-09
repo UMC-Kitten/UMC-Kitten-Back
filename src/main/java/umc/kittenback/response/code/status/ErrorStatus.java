@@ -23,7 +23,10 @@ public enum ErrorStatus implements BaseErrorCode {
 
     FAIL_PARSE_APPLE_IDENTITY_TOKEN(HttpStatus.BAD_REQUEST, "TOKEN4001", "Apple Identity Token 헤더 파싱을 실패하였습니다."),
     FAIL_PARSE_CLAIM(HttpStatus.BAD_REQUEST, "TOKEN4002", "Claim을 파싱하는데 실패하였습니다."),
-    INVALID_APPLE_OAUTH_CLAIMS(HttpStatus.BAD_REQUEST, "TOKEN4003", "유효하지 않은 Apple OAuth Claim입니다.");
+    INVALID_APPLE_OAUTH_CLAIMS(HttpStatus.BAD_REQUEST, "TOKEN4003", "유효하지 않은 Apple OAuth Claim입니다."),
+
+    // PostType Error
+    POSTTYPE_NOT_FOUND(HttpStatus.NOT_FOUND, "POSTTYPE4001", "해당하는 게시글타입이 없습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
