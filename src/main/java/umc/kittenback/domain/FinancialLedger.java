@@ -1,5 +1,7 @@
 package umc.kittenback.domain;
 
+import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,34 +16,41 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import umc.kittenback.domain.common.BaseEntity;
-import umc.kittenback.domain.enums.PetGender;
-import umc.kittenback.domain.enums.PetType;
+import umc.kittenback.domain.enums.RecordType;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Pet extends BaseEntity {
+public class FinancialLedger extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING) // FOOD, HOSPITAL, BEAUTY, SPARETIME, ETC
+    private RecordType recordType;
+
+    @Column(nullable = false)
+    private String title;
+
+//    @Column(nullable = false)
+    private String content;
+
+    @Column(nullable = false)
+    private Long cost;
+
+    @Column(nullable = false)
+    private Date date;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Enumerated(EnumType.STRING)
-    private PetType type;
 
-    private String name;
-
-    private String petProfileImage;
-
-    @Enumerated(EnumType.STRING)
-    private PetGender gender;
-
-    private String notes;
 }

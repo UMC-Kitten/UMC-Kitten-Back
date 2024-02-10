@@ -1,4 +1,4 @@
-package umc.kittenback.domain;
+package umc.kittenback.domain.common;
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;
