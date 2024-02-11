@@ -43,9 +43,9 @@ public class UserController {
     }
 
     @GetMapping("/naver")
-    public ResponseEntity<ApiResponse<UserLoginResponseDto>> naverLogin(@RequestParam("code")String code) {
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> naverLogin(@RequestParam("accessToken")String accessToken) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        String token = naverUserService.naverLogin(code);
+        String token = naverUserService.naverLogin(accessToken);
 
         httpHeaders.add("Authorization", "Bearer " + token);
         UserLoginResponseDto loginResponseDto = userService.login(tokenProvider.getUserEmail(token));

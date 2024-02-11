@@ -45,17 +45,17 @@ public class NaverUserService {
     /**
      * 실제 네이버 로그인을 통해서 JWT 토큰을 발급하는 메소드
      *
-     * @param code 네이버에서 주는 임시 코드
+     * @param 네이버에서 주는 임시 코드
      * @return JWT 토큰
      */
-    public String naverLogin(String code) {
+    public String naverLogin(String accessToken) {
         User user;
 
-        // 1. 네이버로부터 access_code로 받는다.
-        NaverAccessTokenResponseDto tokenResponseDto = getAccessToken(code);
+//        // 1. 네이버로부터 access_code로 받는다.
+//        NaverAccessTokenResponseDto tokenResponseDto = getAccessToken(code);
 
         // 2. 네이버로부터 받은 access_code로 유저 프로필을 받아온다.
-        NaverProfileResponseDto profileResponseDto = getUserInfo(tokenResponseDto.getAccess_token());
+        NaverProfileResponseDto profileResponseDto = getUserInfo(accessTokebn);
 
         // 3. 네이버 이메일로 부터 기존에 사용자가 있는지 조회한다.
         Optional<User> optionalUser = userRepository.findByEmail(profileResponseDto.getEmail());
@@ -88,35 +88,35 @@ public class NaverUserService {
         return tokenProvider.createToken(user.getEmail(), user.getUserRole());
     }
 
-    /**
-     * 네이버로 부터 access_code를 요청한다.
-     *
-     * @param code 네이버에서 부여하는 임시 코드
-     * @return access_code
-     */
-    public NaverAccessTokenResponseDto getAccessToken(String code) {
-
-        // Set Query Parameter
-        UriComponents uri = UriComponentsBuilder
-                .fromHttpUrl(NAVER_TOKEN_REQUEST_URL)
-                .queryParam("grant_type", "authorization_code")
-                .queryParam("client_id", clientId)
-                .queryParam("client_secret", secret)
-                .queryParam("code", code)
-                .build();
-
-        // 액세스 코드를 받기 위한 파라미터 설정
-        // reference https://developers.naver.com/docs/login/api/api.md#4-2--%EC%A0%91%EA%B7%BC-%ED%86%A0%ED%81%B0-%EB%B0%9C%EA%B8%89-%EC%9A%94%EC%B2%AD
-        ResponseEntity<NaverAccessTokenResponseDto> responseDto = restTemplate.getForEntity(uri.toUri(),
-                NaverAccessTokenResponseDto.class);
-
-        // 액세스 토큰 저장
-        if (responseDto.getBody() != null) {
-            return responseDto.getBody();
-        }
-
-        return null;
-    }
+//    /**
+//     * 네이버로 부터 access_code를 요청한다.
+//     *
+//     * @param code 네이버에서 부여하는 임시 코드
+//     * @return access_code
+//     */
+//    public NaverAccessTokenResponseDto getAccessToken(String code) {
+//
+//        // Set Query Parameter
+//        UriComponents uri = UriComponentsBuilder
+//                .fromHttpUrl(NAVER_TOKEN_REQUEST_URL)
+//                .queryParam("grant_type", "authorization_code")
+//                .queryParam("client_id", clientId)
+//                .queryParam("client_secret", secret)
+//                .queryParam("code", code)
+//                .build();
+//
+//        // 액세스 코드를 받기 위한 파라미터 설정
+//        // reference https://developers.naver.com/docs/login/api/api.md#4-2--%EC%A0%91%EA%B7%BC-%ED%86%A0%ED%81%B0-%EB%B0%9C%EA%B8%89-%EC%9A%94%EC%B2%AD
+//        ResponseEntity<NaverAccessTokenResponseDto> responseDto = restTemplate.getForEntity(uri.toUri(),
+//                NaverAccessTokenResponseDto.class);
+//
+//        // 액세스 토큰 저장
+//        if (responseDto.getBody() != null) {
+//            return responseDto.getBody();
+//        }
+//
+//        return null;
+//    }
 
     /**
      * 발급된 access_token으로 유저 프로필 정보를 가져온다.
