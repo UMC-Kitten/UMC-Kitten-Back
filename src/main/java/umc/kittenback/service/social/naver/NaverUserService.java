@@ -45,7 +45,7 @@ public class NaverUserService {
     /**
      * 실제 네이버 로그인을 통해서 JWT 토큰을 발급하는 메소드
      *
-     * @param 네이버에서 주는 임시 코드
+     * @param accessToken
      * @return JWT 토큰
      */
     public String naverLogin(String accessToken) {
@@ -55,7 +55,7 @@ public class NaverUserService {
 //        NaverAccessTokenResponseDto tokenResponseDto = getAccessToken(code);
 
         // 2. 네이버로부터 받은 access_code로 유저 프로필을 받아온다.
-        NaverProfileResponseDto profileResponseDto = getUserInfo(accessTokebn);
+        NaverProfileResponseDto profileResponseDto = getUserInfo(accessToken);
 
         // 3. 네이버 이메일로 부터 기존에 사용자가 있는지 조회한다.
         Optional<User> optionalUser = userRepository.findByEmail(profileResponseDto.getEmail());
