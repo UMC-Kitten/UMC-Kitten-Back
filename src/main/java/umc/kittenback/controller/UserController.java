@@ -27,10 +27,10 @@ public class UserController {
     private final AppleUserService appleUserService;
 
     @GetMapping("/kakao")
-    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("code")String code){
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("accessToken")String accessToken){
         // Set Hedaer
         HttpHeaders httpHeaders = new HttpHeaders();
-        String token = kakaoUserService.kakaoLogin(code);
+        String token = kakaoUserService.kakaoLogin(accessToken);
 
         httpHeaders.add("Authorization", "Bearer " + token);
         UserLoginResponseDto loginResponseDto = userService.login(tokenProvider.getUserEmail(token));
