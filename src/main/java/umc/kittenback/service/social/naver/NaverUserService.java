@@ -51,7 +51,7 @@ public class NaverUserService {
      * @param accessToken
      * @return JWT 토큰
      */
-    public String naverLogin(String accessToken) {
+    public String naverLogin(String accessToken) throws UnsupportedEncodingException {
         User user;
 
 //        // 1. 네이버로부터 access_code로 받는다.

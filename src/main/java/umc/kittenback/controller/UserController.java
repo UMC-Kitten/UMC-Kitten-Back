@@ -1,5 +1,6 @@
 package umc.kittenback.controller;
 
+import java.io.UnsupportedEncodingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,8 @@ public class UserController {
     }
 
     @GetMapping("/naver")
-    public ResponseEntity<ApiResponse<UserLoginResponseDto>> naverLogin(@RequestParam("accessToken")String accessToken) {
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> naverLogin(@RequestParam("accessToken")String accessToken)
+            throws UnsupportedEncodingException {
         HttpHeaders httpHeaders = new HttpHeaders();
         String token = naverUserService.naverLogin(accessToken);
 
