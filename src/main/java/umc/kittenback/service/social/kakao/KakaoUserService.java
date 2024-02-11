@@ -14,12 +14,14 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import umc.kittenback.config.token.TokenProvider;
+import umc.kittenback.domain.Pet;
 import umc.kittenback.domain.User;
 import umc.kittenback.domain.enums.OAuth2Provider;
 import umc.kittenback.domain.enums.UserRole;
 import umc.kittenback.dto.kakao.KakaoAccessTokenResponseDto;
 import umc.kittenback.dto.kakao.KakaoAccountResponseDto;
 import umc.kittenback.dto.kakao.KakaoResponseDto;
+import umc.kittenback.dto.user.UserAdditionalRequestDto;
 import umc.kittenback.repository.UserRepository;
 
 @Service
@@ -80,7 +82,7 @@ public class KakaoUserService {
                     .provider(OAuth2Provider.KAKAO)
                     .providerId(providerId.toString())
                     .profileImage(null)
-                    .hasPet(false)
+                    .hasPet(null)
                     .pets(null)
                     .build();
 
