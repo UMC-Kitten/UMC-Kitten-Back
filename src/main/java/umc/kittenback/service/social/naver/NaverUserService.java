@@ -1,5 +1,8 @@
 package umc.kittenback.service.social.naver;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -124,11 +127,11 @@ public class NaverUserService {
      * @param accessToken
      * @return 유저 프로필을 담은 NaverProfileResponse 객체
      */
-    public NaverProfileResponseDto getUserInfo(String accessToken) {
+    public NaverProfileResponseDto getUserInfo(String accessToken) throws UnsupportedEncodingException {
 
         // Set Header with Bearer Access Token
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer " + accessToken);
+        headers.add("Authorization", "Bearer " + URLEncoder.encode(accessToken, StandardCharsets.UTF_8.toString()));
 
         // 네이버로 부터 유저 프로필 정보를 가져온다
         // refrence https://developers.naver.com/docs/login/profile/profile.md
