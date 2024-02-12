@@ -3,7 +3,6 @@ package umc.kittenback.service.pet;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.ErrorState;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.kittenback.domain.Pet;
