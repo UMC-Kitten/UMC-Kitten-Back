@@ -7,11 +7,16 @@ import javax.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import umc.kittenback.domain.HealthNoteImage;
+import umc.kittenback.domain.enums.HealthNoteType;
 
 public class HealthNoteRequestDto {
     @Getter
     @Builder
     public static class writeHealthNoteDto {
+        @NotBlank
+        Long petId;
+        @NotBlank
+        HealthNoteType recordType;
         @NotBlank
         String title;
         String hospital;
@@ -25,6 +30,10 @@ public class HealthNoteRequestDto {
     @Getter
     @Builder
     public static class editHealthNoteDto {
+        @NotBlank
+        Long petId;
+        @NotBlank
+        HealthNoteType recordType;
         @NotBlank
         String title;
         String hospital;

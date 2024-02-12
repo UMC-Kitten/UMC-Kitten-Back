@@ -13,6 +13,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import umc.kittenback.domain.common.BaseEntity;
 
 @Entity
 @Getter
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class HealthNoteImage {
+public class HealthNoteImage extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.kittenback.domain.HealthNote;
 import umc.kittenback.domain.HealthNoteImage;
+import umc.kittenback.domain.Pet;
 import umc.kittenback.domain.User;
 import umc.kittenback.dto.checkIn.HealthNote.HealthNoteRequestDto;
 import umc.kittenback.exception.handler.UserHandler;
 import umc.kittenback.repository.HealthNoteRepository;
+import umc.kittenback.repository.PetRepository;
 import umc.kittenback.repository.UserRepository;
 import umc.kittenback.response.code.status.ErrorStatus;
 
@@ -20,6 +22,7 @@ public class HealthNoteCommandServiceImpl implements HealthNoteCommandService{
 
     private final UserRepository userRepository;
     private final HealthNoteRepository healthNoteRepository;
+    private final PetRepository petRepository;
 
     @Override
     @Transactional
@@ -29,7 +32,14 @@ public class HealthNoteCommandServiceImpl implements HealthNoteCommandService{
 //        List<HealthNoteImage> imageList = req.getImages().stream()
 //                .map(imageUrl -> new HealthNoteImage(imageUrl))
 //                .collect(Collectors.toList());
+
+        Pet pet = petRepository.findById(req.getPetId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 펫이 존재하지 않습니다. id=" + id));
+//                .orElseThrow(() -> new PetHandler(ErrorStatus.PET_NOT_FOUND)); // 차후 핸들러 만들어주기.
+
         healthNoteRepository.save(HealthNote.builder()
+                .recordType(req.getRecordType())
+                .pet(pet)
                 .title(req.getTitle())
                 .hospital(req.getHospital())
                 .date(req.getDate())
@@ -44,21 +54,25 @@ public class HealthNoteCommandServiceImpl implements HealthNoteCommandService{
     @Override
     @Transactional
     public Boolean editHealthNote(Long userId, Long id, HealthNoteRequestDto.editHealthNoteDto req) {
-        User user = userRepository.findById(id)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
-//        List<HealthNoteImage> imageList = req.getImages().stream()
-//                .map(imageUrl -> new HealthNoteImage(imageUrl))
-//                .collect(Collectors.toList());
 
-        healthNoteRepository.save(HealthNote.builder()
-                        .title(req.getTitle())
-                        .hospital(req.getHospital())
-                        .date(req.getDate())
-                        .cost(req.getCost())
-                        .content(req.getContent())
-//                .imageList(imageList)
-                        .build()
-        );
+        Pet pet = petRepository.findById(req.getPetId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 펫이 존재하지 않습니다. id=" + id));
+
+        HealthNote healthNote = healthNoteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 건강수첩이 존재하지 않습니다. id=" + id));
+
+        // 각 필드 수정
+        healthNote.setRecordType(req.getRecordType());
+        healthNote.setPet(pet);
+        healthNote.setTitle(req.getTitle());
+        healthNote.setHospital(req.getHospital());
+        healthNote.setDate(req.getDate());
+        healthNote.setCost(req.getCost());
+        healthNote.setContent(req.getContent());
+
+        healthNoteRepository.save(healthNote);
         return true;
     }
 
@@ -66,7 +80,7 @@ public class HealthNoteCommandServiceImpl implements HealthNoteCommandService{
     @Transactional
     public Boolean deleteHealthNote(Long userId, Long id){
         HealthNote healthNote = healthNoteRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("ID 값을 찾을 수 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당 건강수첩이 존재하지 않습니다. id=" + id));
         healthNoteRepository.delete(healthNote);
 
         return true;
