@@ -44,6 +44,7 @@ public class PetServiceImpl implements PetService{
     }
 
     @Override
+    @Transactional
     public void deletePet(Long petId) {
         Pet pet = petRepository.findById(petId).orElseThrow(() ->
                 new PetHandler(ErrorStatus.PET_NOT_FOUND));

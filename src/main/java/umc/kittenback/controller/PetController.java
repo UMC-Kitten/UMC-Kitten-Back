@@ -52,6 +52,7 @@ public class PetController {
     @DeleteMapping("/pet/{petId}")
     @Operation(summary = "반려동물 삭제 API", description = "등록된 반려동물을 삭제합니다.")
     public ResponseEntity<ApiResponse<Void>> deletePet(@PathVariable(name = "petId") Long petId) {
+        petService.deletePet(petId);
         return ResponseEntity.ok()
                 .body(ApiResponse.onSuccess(null));
     }
