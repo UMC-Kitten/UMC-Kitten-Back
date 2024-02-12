@@ -9,6 +9,7 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,10 +52,26 @@ public class PetController {
 
     @DeleteMapping("/pet/{petId}")
     @Operation(summary = "반려동물 삭제 API", description = "등록된 반려동물을 삭제합니다.")
+    @Parameters({
+            @Parameter(name = "petId", description = "pet 고유번호, path variable 입니다!")
+
+    })
     public ResponseEntity<ApiResponse<Void>> deletePet(@PathVariable(name = "petId") Long petId) {
         petService.deletePet(petId);
         return ResponseEntity.ok()
                 .body(ApiResponse.onSuccess(null));
+    }
+
+    @GetMapping("/{userId}/pets")
+    @Operation(summary = "반려동물 조회 API", description = "사용자의 등록된 반려동물을 모두 조회합니다.")
+    @Parameters({
+            @Parameter(name = "userId", description = "사용자 고유번호, path variable 입니다!")
+
+    })
+    public ResponseEntity<ApiResponse<List<PetResponseDto>>> getAllPets(@PathVariable(name = "userId") Long userId) {
+        List<PetResponseDto> allPetsByUserId = petService.findAllPetsByUserId(userId);
+        return ResponseEntity.ok()
+                .body(ApiResponse.onSuccess(allPetsByUserId));
     }
 
 

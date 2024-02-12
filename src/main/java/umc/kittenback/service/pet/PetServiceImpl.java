@@ -52,4 +52,18 @@ public class PetServiceImpl implements PetService{
         petRepository.delete(pet);
 
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<PetResponseDto> findAllPetsByUserId(Long userId) {
+        List<Pet> pets = petRepository.findAllByUserId(userId);
+        return pets.stream()
+                .map(pet -> new PetResponseDto(
+                        pet.getType(),
+                        pet.getName(),
+                        pet.getPetProfileImage(),
+                        pet.getGender(),
+                        pet.getNotes()))
+                .collect(Collectors.toList());
+    }
 }
