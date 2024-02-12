@@ -1,5 +1,6 @@
 package umc.kittenback.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import java.io.UnsupportedEncodingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -28,10 +29,11 @@ public class UserController {
     private final AppleUserService appleUserService;
 
     @GetMapping("/kakao")
-    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("accessToken")String accessToken){
+    @Operation(summary = "kakao 로그인 API", description = "카카오 로그인 API입니다.")
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("code")String code){
         // Set Hedaer
         HttpHeaders httpHeaders = new HttpHeaders();
-        String token = kakaoUserService.kakaoLogin(accessToken);
+        String token = kakaoUserService.kakaoLogin(code);
 
         httpHeaders.add("Authorization", "Bearer " + token);
         UserLoginResponseDto loginResponseDto = userService.login(tokenProvider.getUserEmail(token));
@@ -43,9 +45,27 @@ public class UserController {
                 .body(apiResponse);
     }
 
+
+//    @GetMapping("/kakao")
+//    @Operation(summary = "kakao 로그인 API", description = "카카오 로그인 API입니다.")
+//    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("accessToken")String accessToken){
+//        // Set Hedaer
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        String token = kakaoUserService.kakaoLogin(accessToken);
+//
+//        httpHeaders.add("Authorization", "Bearer " + token);
+//        UserLoginResponseDto loginResponseDto = userService.login(tokenProvider.getUserEmail(token));
+//
+//        ApiResponse<UserLoginResponseDto> apiResponse = ApiResponse.onSuccess(loginResponseDto);
+//
+//        return ResponseEntity.ok()
+//                .headers(httpHeaders)
+//                .body(apiResponse);
+//    }
+
     @GetMapping("/naver")
-    public ResponseEntity<ApiResponse<UserLoginResponseDto>> naverLogin(@RequestParam("accessToken")String accessToken)
-            throws UnsupportedEncodingException {
+    @Operation(summary = "naver 로그인 API", description = "naver 로그인 API입니다.")
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> naverLogin(@RequestParam("accessToken")String accessToken) {
         HttpHeaders httpHeaders = new HttpHeaders();
         String token = naverUserService.naverLogin(accessToken);
 
@@ -60,6 +80,7 @@ public class UserController {
     }
 
     @GetMapping("/apple")
+    @Operation(summary = "apple 로그인 API", description = "apple 로그인 API입니다.")
     public ResponseEntity<ApiResponse<UserLoginResponseDto>> appleLogin(@RequestParam("code") String code, @RequestParam("nonce") String nonce) {
         // Apple 로그인 처리
         String token = appleUserService.login(code, nonce);
