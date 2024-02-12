@@ -53,7 +53,7 @@ public class LikeCommandController {
     @Parameters({
             @Parameter(name = "likeId", description = "좋아요 고유번호, path variable 입니다!")
     })
-    public ResponseEntity<Boolean> deleteLike(@PathVariable(name = "likeId") Long likeId){
-        return ResponseEntity.ok(likeCommandService.deleteLike(likeId));
+    public ApiResponse<Boolean> deleteLike(@PathVariable(name = "likeId") Long likeId){
+        return ApiResponse.onSuccess(likeCommandService.deleteLike(likeId));
     }
 }

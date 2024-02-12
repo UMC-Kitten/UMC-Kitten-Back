@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import umc.kittenback.dto.mypage.MyPageJoinResponseDto;
 import umc.kittenback.dto.mypage.MyPageRequestDto;
+import umc.kittenback.dto.user.UserDetailResponseDto;
 import umc.kittenback.response.ApiResponse;
 import umc.kittenback.service.mypage.MyPageCommandServiceImpl;
 import umc.kittenback.service.mypage.MyPageQueryServiceImpl;
@@ -38,7 +39,7 @@ public class MyPageController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "access 토큰 만료", content = @Content(schema = @Schema(implementation = ApiResponse.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "access 토큰 이상", content = @Content(schema = @Schema(implementation = ApiResponse.class)))})
     @Parameters({
-            @Parameter(name = "id", description = "UserId 값")
+            @Parameter(name = "id", description = "userId 값")
     })
     public ApiResponse<MyPageJoinResponseDto> getMyPageInfo(@PathVariable Long id) {
         MyPageJoinResponseDto joinResponseDto = MyPageQueryService.getMyPageInfo(id);
@@ -47,20 +48,20 @@ public class MyPageController {
 
     @PostMapping("/change/nickname")
     @Operation(summary = "닉네임 변경 API", description = "닉네임 변경 시 사용되는 API입니다.")
-    public ResponseEntity<Boolean> changeNickname(@RequestBody MyPageRequestDto.ChangeNicknameDto req) {
-        return ResponseEntity.ok(MyPageCommandService.changeNickname(req));
+    public ApiResponse<UserDetailResponseDto> changeNickname(@RequestBody MyPageRequestDto.ChangeNicknameDto req) {
+        return ApiResponse.onSuccess(MyPageCommandService.changeNickname(req));
     }
 
     @PostMapping("/change/hasPet")
     @Operation(summary = "반려인 설정 변경 API", description = "반려인 설정 변경 시 사용되는 API입니다.")
-    public ResponseEntity<Boolean> changeHasPet(@RequestBody MyPageRequestDto.ChangeHasPetDto req) {
-        return ResponseEntity.ok(MyPageCommandService.changeHasPet(req));
+    public ApiResponse<UserDetailResponseDto> changeHasPet(@RequestBody MyPageRequestDto.ChangeHasPetDto req) {
+        return ApiResponse.onSuccess(MyPageCommandService.changeHasPet(req));
     }
 
     @PostMapping("/change/profileImage")
     @Operation(summary = "프로필 이미지 변경 API", description = "마이 페이지 접속 시 보이는 정보에 대한 API입니다.")
-    public ResponseEntity<Boolean> changeProfileImage(@RequestBody MyPageRequestDto.ChangeProfileImageDto req) {
-        return ResponseEntity.ok(MyPageCommandService.changeProfileImage(req));
+    public ApiResponse<UserDetailResponseDto> changeProfileImage(@RequestBody MyPageRequestDto.ChangeProfileImageDto req) {
+        return ApiResponse.onSuccess(MyPageCommandService.changeProfileImage(req));
     }
 
     // agreement 누락으로 보류 상태
