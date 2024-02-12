@@ -9,4 +9,6 @@ import umc.kittenback.dto.pet.PetResponseDto;
 public interface PetService {
 
     List<PetResponseDto> savePets(User user, List<PetRequestDto> petInfo);
+
+    void deletePet(Long petId);
 }

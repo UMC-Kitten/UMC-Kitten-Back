@@ -3,13 +3,16 @@ package umc.kittenback.service.pet;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.ErrorState;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.kittenback.domain.Pet;
 import umc.kittenback.domain.User;
 import umc.kittenback.dto.pet.PetRequestDto;
 import umc.kittenback.dto.pet.PetResponseDto;
+import umc.kittenback.exception.handler.PetHandler;
 import umc.kittenback.repository.PetRepository;
+import umc.kittenback.response.code.status.ErrorStatus;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +41,14 @@ public class PetServiceImpl implements PetService{
                     pet.getGender(),
                     pet.getNotes());
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deletePet(Long petId) {
+        Pet pet = petRepository.findById(petId).orElseThrow(() ->
+                new PetHandler(ErrorStatus.PET_NOT_FOUND));
+
+        petRepository.delete(pet);
+
     }
 }

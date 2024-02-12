@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,4 +48,13 @@ public class PetController {
         return ResponseEntity.ok()
                 .body(ApiResponse.onSuccess(petResponseDtos));
     }
+
+    @DeleteMapping("/pet/{petId}")
+    @Operation(summary = "반려동물 삭제 API", description = "등록된 반려동물을 삭제합니다.")
+    public ResponseEntity<ApiResponse<Void>> deletePet(@PathVariable(name = "petId") Long petId) {
+        return ResponseEntity.ok()
+                .body(ApiResponse.onSuccess(null));
+    }
+
+
 }
