@@ -11,5 +11,5 @@ import umc.kittenback.domain.User;
 public interface FinancialLedgerRepository extends JpaRepository<FinancialLedger, Long> {
 
     @Query("SELECT f FROM FinancialLedger f WHERE SUBSTRING(f.date, 1, 7) = :day AND f.user = :user")
-    List<FinancialLedger> findAllByUserAndDay(@Param("user")User user, Date day);
+    List<FinancialLedger> findAllByUserAndDay(@Param("user") User user, @Param("day") Date day);
 }

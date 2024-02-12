@@ -1,5 +1,6 @@
 package umc.kittenback.controller;
 
+import java.io.UnsupportedEncodingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +28,10 @@ public class UserController {
     private final AppleUserService appleUserService;
 
     @GetMapping("/kakao")
-    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("code")String code){
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("accessToken")String accessToken){
         // Set Hedaer
         HttpHeaders httpHeaders = new HttpHeaders();
-        String token = kakaoUserService.kakaoLogin(code);
+        String token = kakaoUserService.kakaoLogin(accessToken);
 
         httpHeaders.add("Authorization", "Bearer " + token);
         UserLoginResponseDto loginResponseDto = userService.login(tokenProvider.getUserEmail(token));
@@ -43,9 +44,10 @@ public class UserController {
     }
 
     @GetMapping("/naver")
-    public ResponseEntity<ApiResponse<UserLoginResponseDto>> naverLogin(@RequestParam("code")String code) {
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> naverLogin(@RequestParam("accessToken")String accessToken)
+            throws UnsupportedEncodingException {
         HttpHeaders httpHeaders = new HttpHeaders();
-        String token = naverUserService.naverLogin(code);
+        String token = naverUserService.naverLogin(accessToken);
 
         httpHeaders.add("Authorization", "Bearer " + token);
         UserLoginResponseDto loginResponseDto = userService.login(tokenProvider.getUserEmail(token));

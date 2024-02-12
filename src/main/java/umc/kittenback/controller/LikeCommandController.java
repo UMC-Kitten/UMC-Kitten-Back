@@ -24,7 +24,7 @@ import umc.kittenback.dto.like.LikeResponseDTO;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping("/likes")
+@RequestMapping("/api/v1/likes")
 public class LikeCommandController {
 
     private final LikeCommandServiceImpl likeCommandService;

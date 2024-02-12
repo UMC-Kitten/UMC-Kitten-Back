@@ -14,7 +14,7 @@ import umc.kittenback.service.firebase.FireBaseService;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping("/upload")
+@RequestMapping("/api/v1/upload")
 public class TestFileController {
 
     private final FireBaseService fireBaseService;

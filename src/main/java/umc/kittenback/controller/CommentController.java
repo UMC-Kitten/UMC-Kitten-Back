@@ -28,7 +28,7 @@ import umc.kittenback.dto.comment.CommentResponseDTO;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping("/comments")
+@RequestMapping("/api/v1/comments")
 public class CommentController {
 
     private final CommentCommandServiceImpl commentCommandService;

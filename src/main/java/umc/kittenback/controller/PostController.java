@@ -37,7 +37,7 @@ import umc.kittenback.dto.post.PostResponseDTO;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping("/posts")
+@RequestMapping("/api/v1/posts")
 public class PostController {
 
     private final PostCommandServiceImpl postCommandService;
@@ -122,7 +122,5 @@ public class PostController {
         List<Hashtag> hashtagList = hashtagQueryService.getHashList(post);
         return ApiResponse.onSuccess(PostConverter.toPostPreviewDTO(post));
     }
-
-
 
 }

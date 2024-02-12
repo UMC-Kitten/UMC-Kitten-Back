@@ -39,7 +39,7 @@ social:
 
   apple:
     iss: https://appleid.apple.com
-    client-id: com.together.ryuwon.together
+    clientId: com.together.ryuwon.together
 
 app:
   firebase-configuration-file: ./serviceAccountKey.json

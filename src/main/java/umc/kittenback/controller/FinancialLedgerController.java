@@ -32,7 +32,7 @@ import umc.kittenback.dto.FinancialLedger.FinancialLedgerResponseDTO;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping("/financialLedger")
+@RequestMapping("/api/v1/financialLedger")
 public class FinancialLedgerController {
 
     private final FinancialLedgerCommandServiceImpl financialLedgerCommandService;
