@@ -51,7 +51,7 @@ public class NaverUserService {
      * @param accessToken
      * @return JWT 토큰
      */
-    public String naverLogin(String accessToken) throws UnsupportedEncodingException {
+    public String naverLogin(String accessToken)  {
         User user;
 
 //        // 1. 네이버로부터 access_code로 받는다.
@@ -127,11 +127,11 @@ public class NaverUserService {
      * @param accessToken
      * @return 유저 프로필을 담은 NaverProfileResponse 객체
      */
-    public NaverProfileResponseDto getUserInfo(String accessToken) throws UnsupportedEncodingException {
+    public NaverProfileResponseDto getUserInfo(String accessToken) {
 
         // Set Header with Bearer Access Token
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer " + URLEncoder.encode(accessToken, StandardCharsets.UTF_8.toString()));
+        headers.add("Authorization", "Bearer " + accessToken);
 
         // 네이버로 부터 유저 프로필 정보를 가져온다
         // refrence https://developers.naver.com/docs/login/profile/profile.md
