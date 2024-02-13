@@ -140,4 +140,16 @@ public class PostController {
         return ResponseEntity.ok()
                 .body(apiResponse);
     }
+
+    // 자랑해요 게시판 글을 작성한 최신 순서대로 조회한다.
+    @GetMapping("/boast/order-by-createdDate")
+    @Operation(summary = "자랑해요 게시판 글 작성한 최신 순서 조회 API", description = "자랑해요 게시판 글을 작성한 최신 순서대로 조회하는 API입니다.")
+    public ResponseEntity<ApiResponse<PostResponseDTO.PostPreviewListDTO>> getboastPosts(Pageable pageable) {
+        Page<Post> posts = postQueryService.getBoastPostsOrderByCreateDate(pageable);
+
+        ApiResponse<PostResponseDTO.PostPreviewListDTO> apiResponse = ApiResponse.onSuccess(PostConverter.toPostPreviewListDTO(posts));
+
+        return ResponseEntity.ok()
+                .body(apiResponse);
+    }
 }

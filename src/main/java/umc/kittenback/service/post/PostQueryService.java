@@ -1,6 +1,7 @@
 package umc.kittenback.service.post;
 
 import java.util.List;
+import org.aspectj.apache.bcel.classfile.annotation.TypeAnnotationGen;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,4 +16,5 @@ public interface PostQueryService {
 
     Page<Post> getFreePostsOrderByLiKes(Pageable pageable);
 
+    Page<Post> getBoastPostsOrderByCreateDate(Pageable pageable);
 }

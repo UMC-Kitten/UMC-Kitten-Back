@@ -17,4 +17,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p LEFT JOIN p.likeList l WHERE p.postType = :postType GROUP BY p.id ORDER BY COUNT(l.id) DESC")
     Page<Post> findPostsByTypeOrderByLikes(@Param("postType") PostType postType, Pageable pageable);
 
+    @Query("SELECT p FROM Post p WHERE p.postType = :postType ORDER BY p.createDate DESC")
+    Page<Post> findByPostTypeOrderByCreateDate(@Param("postType") PostType postType, Pageable pageable);
+
 }

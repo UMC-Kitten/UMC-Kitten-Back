@@ -34,4 +34,10 @@ public class PostQueryServiceImpl implements PostQueryService{
     public Page<Post> getFreePostsOrderByLiKes(Pageable pageable) {
         return postRepository.findPostsByTypeOrderByLikes(PostType.FREE, pageable);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Post> getBoastPostsOrderByCreateDate(Pageable pageable) {
+        return postRepository.findByPostTypeOrderByCreateDate(PostType.BOAST, pageable);
+    }
 }

@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import umc.kittenback.domain.Hashtag;
+import umc.kittenback.domain.PostImage;
 import umc.kittenback.dto.comment.CommentResponseDTO;
 import umc.kittenback.dto.like.LikeResponseDTO;
 
@@ -35,6 +36,7 @@ public class PostResponseDTO {
         CommentResponseDTO.CommentPreviewListDTO commentPreviewListDTO;
         LikeResponseDTO.LikePreviewListDTO likePreviewListDTO;
         List<Hashtag> hashtagList;
+        List<PostImage> imageList;
     }
 
     @Builder
