@@ -42,7 +42,7 @@ public class HealthNoteController {
     // 건강수첩 작성 시 사용되는 API
     // Jwt에서 id값 추출 가능할 경우 Mapping 변경될 예정
     public ApiResponse<Boolean> writeHealthNote(@PathVariable Long id,
-                                                   @RequestBody writeHealthNoteDto req) {
+                                                @RequestBody writeHealthNoteDto req) {
         return ApiResponse.onSuccess(HealthNoteCommandService.writeHealthNote(id, req));
     }
 
