@@ -5,11 +5,14 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import umc.kittenback.domain.Hospital;
 import umc.kittenback.domain.User;
 import umc.kittenback.dto.checkIn.HealthNote.HealthNotePetDto;
 import umc.kittenback.dto.checkIn.HealthNote.HealthNotePetsResponseDto;
+import umc.kittenback.dto.hospital.HospitalResponseDto;
 import umc.kittenback.exception.handler.UserHandler;
 import umc.kittenback.repository.HealthNoteRepository;
+import umc.kittenback.repository.HospitalRepository;
 import umc.kittenback.repository.UserRepository;
 import umc.kittenback.response.code.status.ErrorStatus;
 
@@ -19,6 +22,7 @@ public class HealthNoteQueryServiceImpl implements HealthNoteQueryService {
 
     private final UserRepository userRepository;
     private final HealthNoteRepository healthNoteRepository;
+    private final HospitalRepository hospitalRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -39,6 +43,17 @@ public class HealthNoteQueryServiceImpl implements HealthNoteQueryService {
 
         return HealthNotePetsResponseDto.builder()
                 .pets(petDtoList)
+                .build();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public HospitalResponseDto getHospitalSearchInfo(String keyword) {
+        List<Hospital> hospitals = hospitalRepository.findByNameContainingOrAddressContaining(keyword, keyword);
+
+        return HospitalResponseDto.builder()
+                .resultNum(hospitals.size())
+                .hospitals(hospitals)
                 .build();
     }
 }
