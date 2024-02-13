@@ -2,7 +2,6 @@ package umc.kittenback.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import umc.kittenback.domain.HealthNote;
 import umc.kittenback.dto.checkIn.HealthNote.HealthNotePetsResponseDto;
 import umc.kittenback.dto.checkIn.HealthNote.HealthNoteRequestDto.editHealthNoteDto;
 import umc.kittenback.dto.checkIn.HealthNote.HealthNoteRequestDto.writeHealthNoteDto;
+import umc.kittenback.dto.hospital.HospitalResponseDto;
 import umc.kittenback.response.ApiResponse;
 import umc.kittenback.service.healthNote.HealthNoteCommandServiceImpl;
 import umc.kittenback.service.healthNote.HealthNoteQueryServiceImpl;
@@ -63,10 +62,11 @@ public class HealthNoteController {
         return ApiResponse.onSuccess(HealthNoteCommandService.deleteHealthNote(userId, id));
     }
 
-//    @GetMapping("/hospital")
-//    @Operation(summary = "건강수첩 병원 검색 API", description = "건강수첩 작성 중 병원 검색에 사용되는 API.")
-//    public ApiResponse<Boolean> searchHospital(@RequestParam String search) {
-//        return
-//    }
+    @GetMapping("/hospital")
+    @Operation(summary = "건강수첩 병원 검색 API", description = "건강수첩 작성 중 병원 검색에 사용되는 API.")
+    public ApiResponse<HospitalResponseDto> searchHospital(@RequestParam String keyword) {
+        HospitalResponseDto hospitalResponseDto = HealthNoteQueryService.getHospitalSearchInfo(keyword);
+        return ApiResponse.onSuccess(hospitalResponseDto);
+    }
 
 }
