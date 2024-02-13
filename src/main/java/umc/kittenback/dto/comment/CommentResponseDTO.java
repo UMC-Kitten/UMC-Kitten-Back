@@ -1,5 +1,6 @@
 package umc.kittenback.dto.comment;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class CommentResponseDTO {
     @AllArgsConstructor
     public static class CommentPreviewDTO{
         String content;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "UTC")
         LocalDateTime createdAt;
     }
 
@@ -35,9 +37,9 @@ public class CommentResponseDTO {
     public static class CommentPreviewListDTO{
         List<CommentResponseDTO.CommentPreviewDTO> commentList;
         Integer listSize;
-        Integer totalPage;
-        Long totalElements;
-        Boolean isFirst;
-        Boolean isLast;
+//        Integer totalPage;
+//        Long totalElements;
+//        Boolean isFirst;
+//        Boolean isLast;
     }
 }

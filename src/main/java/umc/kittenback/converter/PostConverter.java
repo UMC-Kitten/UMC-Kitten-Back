@@ -8,8 +8,11 @@ import umc.kittenback.domain.User;
 import umc.kittenback.domain.enums.PostType;
 
 import umc.kittenback.dto.comment.CommentResponseDTO;
+import umc.kittenback.dto.comment.CommentResponseDTO.CommentPreviewListDTO;
+import umc.kittenback.dto.like.LikeResponseDTO.LikePreviewListDTO;
 import umc.kittenback.dto.post.PostRequestDTO.JoinPostDTO;
 import umc.kittenback.dto.post.PostResponseDTO;
+import umc.kittenback.dto.post.PostResponseDTO.PostPreviewDTO;
 
 public class PostConverter {
 
@@ -29,14 +32,17 @@ public class PostConverter {
                 .build();
     }
 
-    public static PostResponseDTO.PostPreviewDTO toPostPreviewDTO(Post post){
-        CommentResponseDTO.CommentPreviewListDTO commentPreviewListDTO = CommentConverter.toCommentPreviewListDTO(post.getCommentList());
+    public static PostPreviewDTO toPostPreviewDTO(Post post){
+        CommentPreviewListDTO commentPreviewListDTO = CommentConverter.toCommentPreviewListDTO(post.getCommentList());
+        LikePreviewListDTO likePreviewListDTO = LikeConverter.toLikePreviewListDTO(post.getLikeList());
 
-        return PostResponseDTO.PostPreviewDTO.builder()
+        return PostPreviewDTO.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
+                .writerNickName(post.getUser().getNickname())
                 .createdAt(post.getCreateDate())
                 .commentPreviewListDTO(commentPreviewListDTO)
+                .likePreviewListDTO(likePreviewListDTO)
 //                .hashtagList(hashtagList)
                 .build();
     }

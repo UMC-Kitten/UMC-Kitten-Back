@@ -1,5 +1,6 @@
 package umc.kittenback.dto.post;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import umc.kittenback.domain.Hashtag;
 import umc.kittenback.dto.comment.CommentResponseDTO;
+import umc.kittenback.dto.like.LikeResponseDTO;
 
 public class PostResponseDTO {
 
@@ -27,8 +29,11 @@ public class PostResponseDTO {
     public static class PostPreviewDTO{
         String title;
         String content;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "UTC")
         LocalDateTime createdAt;
+        String writerNickName;
         CommentResponseDTO.CommentPreviewListDTO commentPreviewListDTO;
+        LikeResponseDTO.LikePreviewListDTO likePreviewListDTO;
         List<Hashtag> hashtagList;
     }
 
