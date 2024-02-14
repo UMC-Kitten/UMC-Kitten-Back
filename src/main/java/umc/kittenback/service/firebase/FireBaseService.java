@@ -2,6 +2,7 @@ package umc.kittenback.service.firebase;
 
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
 import com.google.firebase.cloud.StorageClient;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -62,9 +63,21 @@ public class FireBaseService {
     }
 
     // (게시글) 파일 불러오기
-    public byte[] getFile(Long userId){
+    public byte[] getFile(Long userId) {
         Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
         return bucket.get("posts/" + userId).getContent();
+    }
+
+    // (게시글) 파일들 불러오기
+    public List<Blob> getFiles(Long userId) {
+        Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
+        String prefix = "posts/" + userId;
+        // Blob 목록 가져옴(Blob 객체의 Iterable을 반환)
+        // prefix로 시작하는 blob 반환
+        Iterable<Blob> blobs = bucket.list(Storage.BlobListOption.prefix(prefix)).iterateAll();
+        List<Blob> fileList = new ArrayList<>();
+        blobs.forEach(fileList::add);
+        return fileList;
     }
 
     // (게시글) 파일들 불러오기
