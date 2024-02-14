@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.kittenback.domain.Post;
@@ -31,13 +33,15 @@ public class PostQueryServiceImpl implements PostQueryService{
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Post> getFreePostsOrderByLiKes(Pageable pageable) {
+    public Page<Post> getFreePostsOrderByLiKes(Integer page) {
+        Pageable pageable = PageRequest.of(page, 10);
         return postRepository.findPostsByTypeOrderByLikes(PostType.FREE, pageable);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Post> getBoastPostsOrderByCreateDate(Pageable pageable) {
+    public Page<Post> getBoastPostsOrderByCreateDate(Integer page) {
+        Pageable pageable = PageRequest.of(page, 10);
         return postRepository.findByPostTypeOrderByCreateDate(PostType.BOAST, pageable);
     }
 }

@@ -24,6 +24,7 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
         User user = userRepository.findById(req.getId())
                 .orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
 //                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 존재하지 않습니다. id=" + id));
+
         user.setNickname(req.getNickname());
         userRepository.save(user);
 
@@ -36,7 +37,7 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
                 .providerId(user.getProviderId())
                 .profileImage(user.getProfileImage())
                 .hasPet(user.getHasPet())
-                .pets(user.getPets())
+//                .pets(user.getPets())
                 .build();
     }
 
