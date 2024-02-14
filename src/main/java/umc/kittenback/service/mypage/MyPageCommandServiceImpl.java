@@ -59,7 +59,7 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
                 .providerId(user.getProviderId())
                 .profileImage(user.getProfileImage())
                 .hasPet(user.getHasPet())
-                .pets(user.getPets())
+//                .pets(user.getPets())
                 .build();
     }
 
@@ -81,7 +81,7 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
                 .providerId(user.getProviderId())
                 .profileImage(user.getProfileImage())
                 .hasPet(user.getHasPet())
-                .pets(user.getPets())
+//                .pets(user.getPets())
                 .build();
     }
 }
