@@ -79,12 +79,4 @@ public class FireBaseService {
         blobs.forEach(fileList::add);
         return fileList;
     }
-
-    // (게시글) 파일들 불러오기
-//    @Transactional
-//    public void getFiles(Long userId){
-//        Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
-//        bucket.
-//        return bucket.get("posts/" + userId).listAll();
-//    }
 }
