@@ -13,21 +13,21 @@ public class HealthNoteListResponseDto {
     // 건강수첩 기록 맞춰서 값 주기
 
     public static class HealthNotePreviewDto {
-        Long id;
-        HealthNoteType type;
-        LocalDateTime dateTime;
-        String title;
-        String content;
-        String hospital;
-        BigInteger cost;
+        private Long id;
+        private HealthNoteType type;
+        private LocalDateTime dateTime;
+        private String title;
+        private String content;
+        private String hospital;
+        private BigInteger cost;
     }
 
     public static class HealthNotePreviewListDto {
-        List<HealthNotePreviewDto> healthNoteList;
-        Integer listSize;
-        Integer totalPage;
-        Long totalElements;
-        Boolean isFirst;
-        Boolean isLast;
+        private List<HealthNotePreviewDto> healthNoteList;
+        private Integer listSize;
+        private Integer totalPage;
+        private Long totalElements;
+        private Boolean isFirst;
+        private Boolean isLast;
     }
 }

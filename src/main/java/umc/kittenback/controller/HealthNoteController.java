@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import umc.kittenback.dto.checkIn.HealthNote.HealthNotePetsResponseDto;
-import umc.kittenback.dto.checkIn.HealthNote.HealthNoteRequestDto.editHealthNoteDto;
-import umc.kittenback.dto.checkIn.HealthNote.HealthNoteRequestDto.writeHealthNoteDto;
+import umc.kittenback.dto.checkIn.HealthNote.HealthNoteRequestDto.EditHealthNoteDto;
+import umc.kittenback.dto.checkIn.HealthNote.HealthNoteRequestDto.WriteHealthNoteDto;
 import umc.kittenback.dto.hospital.HospitalResponseDto;
 import umc.kittenback.response.ApiResponse;
 import umc.kittenback.service.healthNote.HealthNoteCommandServiceImpl;
@@ -41,7 +41,7 @@ public class HealthNoteController {
     // 건강수첩 작성 시 사용되는 API
     // Jwt에서 id값 추출 가능할 경우 Mapping 변경될 예정
     public ApiResponse<Boolean> writeHealthNote(@PathVariable Long id,
-                                                @RequestBody writeHealthNoteDto req) {
+                                                @RequestBody WriteHealthNoteDto req) {
         return ApiResponse.onSuccess(HealthNoteCommandService.writeHealthNote(id, req));
     }
 
@@ -50,7 +50,7 @@ public class HealthNoteController {
     // Jwt에서 id값 추출 가능할 경우 Mapping 변경될 예정
     public ApiResponse<Boolean> editHealthNote(@PathVariable Long userId,
                                                @RequestParam Long id,
-                                               @RequestBody editHealthNoteDto req) {
+                                               @RequestBody EditHealthNoteDto req) {
         return ApiResponse.onSuccess(HealthNoteCommandService.editHealthNote(userId, id, req));
     }
 

@@ -26,7 +26,7 @@ public class HealthNoteCommandServiceImpl implements HealthNoteCommandService{
 
     @Override
     @Transactional
-    public Boolean writeHealthNote(Long id, HealthNoteRequestDto.writeHealthNoteDto req) {
+    public Boolean writeHealthNote(Long id, HealthNoteRequestDto.WriteHealthNoteDto req) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
 //        List<HealthNoteImage> imageList = req.getImages().stream()
@@ -53,7 +53,7 @@ public class HealthNoteCommandServiceImpl implements HealthNoteCommandService{
 
     @Override
     @Transactional
-    public Boolean editHealthNote(Long userId, Long id, HealthNoteRequestDto.editHealthNoteDto req) {
+    public Boolean editHealthNote(Long userId, Long id, HealthNoteRequestDto.EditHealthNoteDto req) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
 
