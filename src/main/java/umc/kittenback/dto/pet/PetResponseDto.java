@@ -13,7 +13,7 @@ import umc.kittenback.domain.enums.PetType;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PetResponseDto {
-
+    private Long id;
     private PetType type;
     private String name;
     private String petProfileImage;
