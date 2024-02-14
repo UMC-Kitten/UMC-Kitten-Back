@@ -50,6 +50,19 @@ public class MyPageRequestDto {
         }
     }
 
+    @Data
+    public static class ChangeAgreementDto {
+        private Long id;
+        private Boolean agreement;
+
+        @JsonCreator
+        public ChangeAgreementDto(@JsonProperty("id") Long id,
+                                  @JsonProperty("agreement") Boolean agreement) {
+            this.id = id;
+            this.agreement = agreement;
+        }
+    }
+
 //    @Getter
 //    @Builder
 //    public static class ChangeNicknameDto {

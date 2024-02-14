@@ -1,5 +1,6 @@
 package umc.kittenback.controller;
 
+import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -64,9 +65,8 @@ public class MyPageController {
         return ApiResponse.onSuccess(MyPageCommandService.changeProfileImage(req));
     }
 
-    // agreement 누락으로 보류 상태
-//    @PostMapping("/change/agreement")
-//    public ResponseEntity<Boolean> changeAgreement(@RequestBody MyPageRequestDto.ChangeAgreementDto req) {
-//        return ResponseEntity.ok(MyPageCommandService.changeAgreement(req));
-//    }
+    @PostMapping("/change/agreement")
+    public ApiResponse<UserDetailResponseDto> changeAgreement(@RequestBody MyPageRequestDto.ChangeAgreementDto req) {
+        return ApiResponse.onSuccess(MyPageCommandService.changeAgreement(req));
+    }
 }
