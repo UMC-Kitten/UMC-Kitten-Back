@@ -4,14 +4,19 @@ import com.google.cloud.storage.Blob;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import umc.kittenback.converter.ImageConverter;
+import umc.kittenback.dto.image.ImageResponseDTO;
+import umc.kittenback.response.ApiResponse;
 import umc.kittenback.service.firebase.FireBaseService;
 
 @RestController
@@ -37,8 +42,17 @@ public class TestFileController {
     }
 
     @GetMapping("/{userId}/files")
-    public ResponseEntity<List<Blob>> getFiles(@RequestParam Long userId) {
+    public ApiResponse<ImageResponseDTO.ImagePreviewListDTO> getFiles(@RequestParam Long userId) {
         List<Blob> files = fireBaseService.getFiles(userId);
-        return ResponseEntity.ok().body(files);
+        return ApiResponse.onSuccess(ImageConverter.toImagePreviewListDTO(files));
     }
+
+//    @GetMapping("/{userId}/files")
+//    public ResponseEntity<List<Blob>> getFiles(@PathVariable Long userId) {
+//        List<Blob> fileList = fireBaseService.getFiles(userId);
+//        if (fileList.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(fileList, HttpStatus.OK);
+//    }
 }
