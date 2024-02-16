@@ -99,4 +99,10 @@ public class UserController {
                 .headers(httpHeaders)
                 .body(apiResponse);
     }
+
+    @GetMapping("/nickname")
+    @Operation(summary = "닉네임 확인 API", description = "닉네임 중복 체크를 위한 닉네임 확인 API 입니다.")
+    public ApiResponse<Boolean> checkNickname(@RequestParam String keyword){
+        return ApiResponse.onSuccess(userService.checkNickname(keyword));
+    }
 }
