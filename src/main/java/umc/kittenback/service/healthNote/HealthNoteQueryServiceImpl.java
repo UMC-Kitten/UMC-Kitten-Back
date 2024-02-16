@@ -50,6 +50,10 @@ public class HealthNoteQueryServiceImpl implements HealthNoteQueryService {
             healthNotes = healthNoteRepository.findAllByPetAndRecordType(pet, category, pageable);
         }
 
+        if (healthNotes.getContent().isEmpty()) {
+            throw new HealthNoteHandler(ErrorStatus.HEALTHNOTE_NOT_FOUND);
+        }
+
         // 여기서 HealthNote 객체들이 잘 로드 되는지 테스트.
         System.out.println(healthNotes.getContent());
 
