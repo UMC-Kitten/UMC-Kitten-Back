@@ -34,6 +34,7 @@ public class PetServiceImpl implements PetService{
             petRepository.save(pet);
 
             return new PetResponseDto(
+                    pet.getId(),
                     pet.getType(),
                     pet.getName(),
                     pet.getPetProfileImage(),
@@ -58,6 +59,7 @@ public class PetServiceImpl implements PetService{
         List<Pet> pets = petRepository.findAllByUserId(userId);
         return pets.stream()
                 .map(pet -> new PetResponseDto(
+                        pet.getId(),
                         pet.getType(),
                         pet.getName(),
                         pet.getPetProfileImage(),

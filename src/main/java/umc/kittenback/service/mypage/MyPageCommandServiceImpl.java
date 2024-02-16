@@ -25,6 +25,7 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
         User user = userRepository.findById(req.getId())
                 .orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
 //                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 존재하지 않습니다. id=" + id));
+
         user.setNickname(req.getNickname());
         userRepository.save(user);
 
@@ -37,8 +38,6 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
                 .providerId(user.getProviderId())
                 .profileImage(user.getProfileImage())
                 .hasPet(user.getHasPet())
-                .agreement(user.getAgreement())
-                .pets(user.getPets())
                 .build();
     }
 
@@ -60,8 +59,6 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
                 .providerId(user.getProviderId())
                 .profileImage(user.getProfileImage())
                 .hasPet(user.getHasPet())
-                .agreement(user.getAgreement())
-                .pets(user.getPets())
                 .build();
     }
 
@@ -83,30 +80,6 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
                 .providerId(user.getProviderId())
                 .profileImage(user.getProfileImage())
                 .hasPet(user.getHasPet())
-                .agreement(user.getAgreement())
-                .pets(user.getPets())
-                .build();
-    }
-
-    @Override
-    @Transactional
-    public UserDetailResponseDto changeAgreement(ChangeAgreementDto req) {
-        User user = userRepository.findById(req.getId())
-                .orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
-        user.setAgreement(req.getAgreement());
-        userRepository.save(user);
-
-        return UserDetailResponseDto.builder()
-                .id(user.getId())
-                .email(user.getEmail())
-                .nickname(user.getNickname())
-                .userRole(user.getUserRole())
-                .provider(user.getProvider())
-                .providerId(user.getProviderId())
-                .profileImage(user.getProfileImage())
-                .hasPet(user.getHasPet())
-                .agreement(user.getAgreement())
-                .pets(user.getPets())
                 .build();
     }
 }

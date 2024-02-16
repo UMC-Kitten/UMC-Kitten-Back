@@ -10,8 +10,10 @@ import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -132,8 +134,8 @@ public class PostController {
     // 자유 게시판 글을 좋아요 순서대로 조회한다.
     @GetMapping("/free/order-by-likes")
     @Operation(summary = "자유 게시판 글 좋아요 순서로 조회 API", description = "자유 게시판 글을 좋아요 순서대로 조회하는 API입니다.")
-    public ResponseEntity<ApiResponse<PostResponseDTO.PostPreviewListDTO>> getFreePosts(Pageable pageable) {
-        Page<Post> posts = postQueryService.getFreePostsOrderByLiKes(pageable);
+    public ResponseEntity<ApiResponse<PostResponseDTO.PostPreviewListDTO>> getFreePosts(@RequestParam(name = "page") Integer page) {
+        Page<Post> posts = postQueryService.getFreePostsOrderByLiKes(page);
 
         ApiResponse<PostResponseDTO.PostPreviewListDTO> apiResponse = ApiResponse.onSuccess(PostConverter.toPostPreviewListDTO(posts));
 
@@ -144,8 +146,8 @@ public class PostController {
     // 자랑해요 게시판 글을 작성한 최신 순서대로 조회한다.
     @GetMapping("/boast/order-by-createdDate")
     @Operation(summary = "자랑해요 게시판 글 작성한 최신 순서 조회 API", description = "자랑해요 게시판 글을 작성한 최신 순서대로 조회하는 API입니다.")
-    public ResponseEntity<ApiResponse<PostResponseDTO.PostPreviewListDTO>> getboastPosts(Pageable pageable) {
-        Page<Post> posts = postQueryService.getBoastPostsOrderByCreateDate(pageable);
+    public ResponseEntity<ApiResponse<PostResponseDTO.PostPreviewListDTO>> getboastPosts(@RequestParam(name = "page") Integer page) {
+        Page <Post> posts = postQueryService.getBoastPostsOrderByCreateDate(page);
 
         ApiResponse<PostResponseDTO.PostPreviewListDTO> apiResponse = ApiResponse.onSuccess(PostConverter.toPostPreviewListDTO(posts));
 

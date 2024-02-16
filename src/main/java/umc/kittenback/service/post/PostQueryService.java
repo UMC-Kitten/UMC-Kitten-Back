@@ -14,7 +14,7 @@ public interface PostQueryService {
 
     Post getPost(Long postId);
 
-    Page<Post> getFreePostsOrderByLiKes(Pageable pageable);
+    Page<Post> getFreePostsOrderByLiKes(Integer page);
 
-    Page<Post> getBoastPostsOrderByCreateDate(Pageable pageable);
+    Page<Post> getBoastPostsOrderByCreateDate(Integer page);
 }
