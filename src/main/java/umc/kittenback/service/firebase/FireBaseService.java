@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import umc.kittenback.dto.image.ImageResponseDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,16 @@ public class FireBaseService {
     @Value("${app.firebase-bucket}")
     private String firebaseBucket;
 
-    // img file 등록
+    // 프로필 이미지 등록
+    public String uploadProfileImage(MultipartFile file, Long userId) throws IOException {
+        String fileName = generateProfileFileName(file.getOriginalFilename(), userId);
+        Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
+        Blob blob = bucket.create(fileName, file.getInputStream(), file.getContentType());
+        String mediaLink = blob.getMediaLink();
+        return mediaLink;
+    }
+
+    // 게시판 img file 등록
     public String uploadFile(MultipartFile file, Long userId) throws IOException {
         Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
         InputStream content = new ByteArrayInputStream(file.getBytes());
@@ -36,7 +46,7 @@ public class FireBaseService {
         return blob.getMediaLink();
     }
 
-    // img files 등록
+    // 게시판 img files 등록
     public List<String> uploadFiles(List<MultipartFile> files, Long userId) throws IOException {
         List<String> mediaLinks = new ArrayList<>();
         Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
