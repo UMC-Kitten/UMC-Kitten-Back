@@ -39,30 +39,12 @@ public class UserController {
     private final AppleUserService appleUserService;
     private final FireBaseService fireBaseService;
 
-    @GetMapping("/kakao")
-    @Operation(summary = "kakao 로그인 API", description = "카카오 로그인 API입니다.")
-    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("code")String code){
-        // Set Hedaer
-        HttpHeaders httpHeaders = new HttpHeaders();
-        String token = kakaoUserService.kakaoLogin(code);
-
-        httpHeaders.add("Authorization", "Bearer " + token);
-        UserLoginResponseDto loginResponseDto = userService.login(tokenProvider.getUserEmail(token));
-
-        ApiResponse<UserLoginResponseDto> apiResponse = ApiResponse.onSuccess(loginResponseDto);
-
-        return ResponseEntity.ok()
-                .headers(httpHeaders)
-                .body(apiResponse);
-    }
-
-
 //    @GetMapping("/kakao")
 //    @Operation(summary = "kakao 로그인 API", description = "카카오 로그인 API입니다.")
-//    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("accessToken")String accessToken){
+//    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("code")String code){
 //        // Set Hedaer
 //        HttpHeaders httpHeaders = new HttpHeaders();
-//        String token = kakaoUserService.kakaoLogin(accessToken);
+//        String token = kakaoUserService.kakaoLogin(code);
 //
 //        httpHeaders.add("Authorization", "Bearer " + token);
 //        UserLoginResponseDto loginResponseDto = userService.login(tokenProvider.getUserEmail(token));
@@ -73,6 +55,24 @@ public class UserController {
 //                .headers(httpHeaders)
 //                .body(apiResponse);
 //    }
+
+
+    @GetMapping("/kakao")
+    @Operation(summary = "kakao 로그인 API", description = "카카오 로그인 API입니다.")
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> kakaoLogin(@RequestParam("accessToken")String accessToken){
+        // Set Hedaer
+        HttpHeaders httpHeaders = new HttpHeaders();
+        String token = kakaoUserService.kakaoLogin(accessToken);
+
+        httpHeaders.add("Authorization", "Bearer " + token);
+        UserLoginResponseDto loginResponseDto = userService.login(tokenProvider.getUserEmail(token));
+
+        ApiResponse<UserLoginResponseDto> apiResponse = ApiResponse.onSuccess(loginResponseDto);
+
+        return ResponseEntity.ok()
+                .headers(httpHeaders)
+                .body(apiResponse);
+    }
 
     @GetMapping("/naver")
     @Operation(summary = "naver 로그인 API", description = "naver 로그인 API입니다.")

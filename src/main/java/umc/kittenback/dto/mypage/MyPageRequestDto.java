@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import org.springframework.web.multipart.MultipartFile;
 
 // 코드 스타일에 맞춰 분리해야 할 듯
 // 수정필요
@@ -27,13 +28,13 @@ public class MyPageRequestDto {
     @Data
     public static class ChangeProfileImageDto {
         private Long id;
-        private String profileImage;
+        private MultipartFile file;
 
         @JsonCreator
         public ChangeProfileImageDto(@JsonProperty("id") Long id,
-                                     @JsonProperty("profileImage") String profileImage) {
+                                     @JsonProperty("file") MultipartFile file) {
             this.id = id;
-            this.profileImage = profileImage;
+            this.file = file;
         }
     }
 

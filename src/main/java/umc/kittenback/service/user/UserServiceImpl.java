@@ -1,6 +1,8 @@
 package umc.kittenback.service.user;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import umc.kittenback.config.token.TokenProvider;
 import umc.kittenback.domain.User;
 import umc.kittenback.dto.image.ImageResponseDTO.ImageDTO;
+import umc.kittenback.dto.pet.PetResponseDto;
 import umc.kittenback.dto.user.UserDetailResponseDto;
 import umc.kittenback.dto.user.UserLoginResponseDto;
 import umc.kittenback.exception.handler.UserHandler;
@@ -46,6 +49,15 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email).orElseThrow(() ->
                 new UserHandler(ErrorStatus.USER_NOT_FOUND));
 
+        List<PetResponseDto> petResponseDtos = user.getPets().stream()
+                .map(pet -> PetResponseDto.builder()
+                        .id(pet.getId())
+                        .name(pet.getName())
+                        .type(pet.getType()) //
+                        .petProfileImage(pet.getPetProfileImage())
+                        .build())
+                .collect(Collectors.toList());
+
         return UserDetailResponseDto.builder()
                 .id(user.getId())
                 .email(user.getEmail())
@@ -55,7 +67,7 @@ public class UserServiceImpl implements UserService {
                 .providerId(user.getProviderId())
                 .agreement(user.getAgreement())
                 .hasPet(user.getHasPet())
-                .pets(user.getPets())
+                .pets(petResponseDtos)
                 .build();
     }
 
