@@ -10,6 +10,7 @@ import umc.kittenback.domain.HealthNoteImage;
 import umc.kittenback.domain.Pet;
 import umc.kittenback.domain.User;
 import umc.kittenback.dto.checkIn.HealthNote.HealthNoteRequestDto;
+import umc.kittenback.exception.handler.HealthNoteHandler;
 import umc.kittenback.exception.handler.UserHandler;
 import umc.kittenback.repository.HealthNoteRepository;
 import umc.kittenback.repository.PetRepository;
@@ -34,8 +35,7 @@ public class HealthNoteCommandServiceImpl implements HealthNoteCommandService{
 //                .collect(Collectors.toList());
 
         Pet pet = petRepository.findById(req.getPetId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 펫이 존재하지 않습니다. id=" + id));
-//                .orElseThrow(() -> new PetHandler(ErrorStatus.PET_NOT_FOUND)); // 차후 핸들러 만들어주기.
+                .orElseThrow(() -> new HealthNoteHandler(ErrorStatus.PET_NOT_FOUND));
 
         healthNoteRepository.save(HealthNote.builder()
                 .recordType(req.getRecordType())
@@ -57,11 +57,11 @@ public class HealthNoteCommandServiceImpl implements HealthNoteCommandService{
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
 
-        Pet pet = petRepository.findById(req.getPetId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 펫이 존재하지 않습니다. id=" + id));
-
         HealthNote healthNote = healthNoteRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 건강수첩이 존재하지 않습니다. id=" + id));
+                .orElseThrow(() -> new HealthNoteHandler(ErrorStatus.HEALTHNOTE_NOT_FOUND));
+
+        Pet pet = petRepository.findById(req.getPetId())
+                .orElseThrow(() -> new HealthNoteHandler(ErrorStatus.PET_NOT_FOUND));
 
         // 각 필드 수정
         healthNote.setRecordType(req.getRecordType());
@@ -80,7 +80,7 @@ public class HealthNoteCommandServiceImpl implements HealthNoteCommandService{
     @Transactional
     public Boolean deleteHealthNote(Long userId, Long id){
         HealthNote healthNote = healthNoteRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 건강수첩이 존재하지 않습니다. id=" + id));
+                .orElseThrow(() -> new HealthNoteHandler(ErrorStatus.HEALTHNOTE_NOT_FOUND));
         healthNoteRepository.delete(healthNote);
 
         return true;
