@@ -64,6 +64,9 @@ public class User extends BaseEntity {
     // 반려동물을 키우고 있는지 여부
     private Boolean hasPet;
 
+    // 마케팅 동의
+    private Boolean agreement;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> pets = new ArrayList<>();
 
@@ -86,5 +89,5 @@ public class User extends BaseEntity {
         this.hasPet = hasPet;
     }
     public void setProfileImage(String profileImage) { this.profileImage = profileImage; }
-
+    public void setAgreement(Boolean agreement) { this.agreement = agreement; }
 }

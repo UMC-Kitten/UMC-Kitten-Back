@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
                 .userRole(user.getUserRole())
                 .provider(user.getProvider())
                 .providerId(user.getProviderId())
+                .agreement(user.getAgreement())
                 .hasPet(user.getHasPet())
                 .pets(user.getPets())
                 .build();

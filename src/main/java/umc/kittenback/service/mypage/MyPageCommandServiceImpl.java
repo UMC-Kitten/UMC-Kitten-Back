@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.kittenback.domain.User;
+import umc.kittenback.dto.mypage.MyPageRequestDto.ChangeAgreementDto;
 import umc.kittenback.dto.mypage.MyPageRequestDto.ChangeHasPetDto;
 import umc.kittenback.dto.mypage.MyPageRequestDto.ChangeNicknameDto;
 import umc.kittenback.dto.mypage.MyPageRequestDto.ChangeProfileImageDto;
@@ -37,7 +38,6 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
                 .providerId(user.getProviderId())
                 .profileImage(user.getProfileImage())
                 .hasPet(user.getHasPet())
-//                .pets(user.getPets())
                 .build();
     }
 
@@ -59,7 +59,6 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
                 .providerId(user.getProviderId())
                 .profileImage(user.getProfileImage())
                 .hasPet(user.getHasPet())
-//                .pets(user.getPets())
                 .build();
     }
 
@@ -81,7 +80,6 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
                 .providerId(user.getProviderId())
                 .profileImage(user.getProfileImage())
                 .hasPet(user.getHasPet())
-//                .pets(user.getPets())
                 .build();
     }
 }
