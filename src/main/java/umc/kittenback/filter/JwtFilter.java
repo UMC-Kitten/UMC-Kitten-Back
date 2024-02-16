@@ -37,8 +37,6 @@ public class JwtFilter extends GenericFilterBean {
             logger.error("Security context에 설정되지 않음", e);
         }
 
-        chain.doFilter(request, response);
-
     }
 
     /*

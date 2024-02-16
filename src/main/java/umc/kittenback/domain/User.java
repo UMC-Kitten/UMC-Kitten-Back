@@ -18,7 +18,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import umc.kittenback.domain.common.BaseEntity;
 import umc.kittenback.domain.enums.OAuth2Provider;
 import umc.kittenback.domain.enums.UserRole;
 
@@ -29,7 +28,7 @@ import umc.kittenback.domain.enums.UserRole;
 @AllArgsConstructor
 @DynamicInsert
 @DynamicUpdate
-public class User extends BaseEntity {
+public class User extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,25 +65,4 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> pets = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> posts = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FinancialLedger> financialLedgers = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Like> likes = new ArrayList<>();
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-    public void setHasPet(Boolean hasPet) {
-        this.hasPet = hasPet;
-    }
-    public void setProfileImage(String profileImage) { this.profileImage = profileImage; }
-
 }

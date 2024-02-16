@@ -1,18 +1,14 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://203.255.3.66:13306/kitten
+    dirver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/user
     username: root
-    password: 5607
-
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+    password:
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
       show-sql: true # true 설정시 JPA 쿼리문 확인 가능
       format-sql: true # JPA의 구현체인 Hibernate가 동작하면서 발생하는 SQL의 가독성을 높여준다.
       generate-ddl: true
@@ -25,22 +21,3 @@ jwt:
   header: Authorization
   secret: 712f0bc8c7475fdc6e30bd3f81aaba2a7c5c648b398a70b2b53b1d0c63163f4f85de9fcf97da6cbd8742bf02fd4cd5090627ae80e6e5564c20064f264c5dbbf6
   duration: 30
-
-social:
-  kakao:
-      clientId: d3f3146fcef4a3b95c27cddd2e4782a2
-      secret: ddckOyrA0DVQwD39YzxifeRhVSkvXki0
-      redirect: http://localhost:8080/login/oauth2/kakao
-
-  naver:
-    clientId: q4yYq9GqZvWRQnbf8S1h
-    secret: NtgmBYXHHQ
-    redirect: http://localhost:8080/login/oauth2/naver
-
-  apple:
-    iss: https://appleid.apple.com
-    clientId: com.together.ryuwon.together
-
-app:
-  firebase-configuration-file: ./serviceAccountKey.json
-  firebase-bucket: test-ecbc5.appspot.com
