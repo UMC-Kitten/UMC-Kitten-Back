@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.kittenback.domain.common.BaseEntity;
 import umc.kittenback.domain.enums.PetGender;
 import umc.kittenback.domain.enums.PetType;
 
