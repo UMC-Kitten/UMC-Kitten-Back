@@ -8,6 +8,6 @@ public interface MyPageCommandService {
     UserDetailResponseDto changeNickname(MyPageRequestDto.ChangeNicknameDto req);
     UserDetailResponseDto changeHasPet(MyPageRequestDto.ChangeHasPetDto req);
     UserDetailResponseDto changeProfileImage(MyPageRequestDto.ChangeProfileImageDto req);
-//    Boolean changeAgreement(MyPageRequestDto.MyPageRequestDto req);
+    UserDetailResponseDto changeAgreement(MyPageRequestDto.ChangeAgreementDto req);
 
 }

@@ -19,5 +19,6 @@ public class UserDetailResponseDto {
     private String providerId;
     private String profileImage;
     private Boolean hasPet;
+    private Boolean agreement;
     private List<Pet> pets;
 }
