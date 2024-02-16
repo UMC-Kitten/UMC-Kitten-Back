@@ -6,6 +6,7 @@ import lombok.Getter;
 import umc.kittenback.domain.Pet;
 import umc.kittenback.domain.enums.OAuth2Provider;
 import umc.kittenback.domain.enums.UserRole;
+import umc.kittenback.dto.pet.PetResponseDto;
 
 @Getter
 @Builder
@@ -20,5 +21,5 @@ public class UserDetailResponseDto {
     private String profileImage;
     private Boolean hasPet;
     private Boolean agreement;
-    private List<Pet> pets;
+    private List<PetResponseDto> pets;
 }

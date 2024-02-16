@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +15,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import umc.kittenback.dto.image.ImageResponseDTO;
+import umc.kittenback.dto.image.ImageResponseDTO.ImageDTO;
 import umc.kittenback.dto.mypage.MyPageJoinResponseDto;
 import umc.kittenback.dto.mypage.MyPageRequestDto;
 import umc.kittenback.dto.user.UserDetailResponseDto;
 import umc.kittenback.response.ApiResponse;
 import umc.kittenback.service.mypage.MyPageCommandServiceImpl;
 import umc.kittenback.service.mypage.MyPageQueryServiceImpl;
+import umc.kittenback.service.user.UserService;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,6 +35,7 @@ public class MyPageController {
 
     private final MyPageQueryServiceImpl MyPageQueryService;
     private final MyPageCommandServiceImpl MyPageCommandService;
+    private final UserService userService;
 
     @GetMapping("/info/{id}")
     @Operation(summary = "마이 페이지 접속 API", description = "마이 페이지 접속 시 보이는 정보에 대한 API입니다.")
@@ -61,9 +68,17 @@ public class MyPageController {
 
     @PostMapping("/change/profileImage")
     @Operation(summary = "프로필 이미지 변경 API", description = "마이 페이지 접속 시 보이는 정보에 대한 API입니다.")
-    public ApiResponse<UserDetailResponseDto> changeProfileImage(@RequestBody MyPageRequestDto.ChangeProfileImageDto req) {
-        return ApiResponse.onSuccess(MyPageCommandService.changeProfileImage(req));
+    public ResponseEntity<ApiResponse<UserDetailResponseDto>> changeProfileImage(@RequestParam("id") Long id,
+                                                                                 @RequestParam("file") MultipartFile file)
+            throws IOException {
+        UserDetailResponseDto userDetailResponseDto = MyPageCommandService.changeProfileImage(id, file);
+
+        ApiResponse<UserDetailResponseDto> apiResponse = ApiResponse.onSuccess(userDetailResponseDto);
+
+        return ResponseEntity.ok()
+                .body(apiResponse);
     }
+
 
     @PostMapping("/change/agreement")
     public ApiResponse<UserDetailResponseDto> changeAgreement(@RequestBody MyPageRequestDto.ChangeAgreementDto req) {

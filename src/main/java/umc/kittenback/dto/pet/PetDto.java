@@ -12,11 +12,13 @@ import umc.kittenback.domain.enums.PetType;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PetResponseDto {
+public class PetDto {
+
     private Long id;
     private PetType type;
     private String name;
     private String petProfileImage;
     private PetGender gender;
     private String notes;
+    
 }
