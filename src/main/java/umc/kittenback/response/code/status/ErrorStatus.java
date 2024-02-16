@@ -19,7 +19,17 @@ public enum ErrorStatus implements BaseErrorCode {
     // User 관련 에러
     USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "USER4001", "사용자가 없습니다."),
     NICKNAME_INPUT_NOT_EXIST(HttpStatus.BAD_REQUEST, "USER4002", "닉네임을 입력해주세요"),
-    DUPLICATE_NICKNAME(HttpStatus.BAD_REQUEST, "USER4003", "이미 사용중인 닉네임입니다.");
+    DUPLICATE_NICKNAME(HttpStatus.BAD_REQUEST, "USER4003", "이미 사용중인 닉네임입니다."),
+
+    FAIL_PARSE_APPLE_IDENTITY_TOKEN(HttpStatus.BAD_REQUEST, "TOKEN4001", "Apple Identity Token 헤더 파싱을 실패하였습니다."),
+    FAIL_PARSE_CLAIM(HttpStatus.BAD_REQUEST, "TOKEN4002", "Claim을 파싱하는데 실패하였습니다."),
+    INVALID_APPLE_OAUTH_CLAIMS(HttpStatus.BAD_REQUEST, "TOKEN4003", "유효하지 않은 Apple OAuth Claim입니다."),
+
+    // PostType Error
+    POSTTYPE_NOT_FOUND(HttpStatus.NOT_FOUND, "POSTTYPE4001", "해당하는 게시글타입이 없습니다."),
+
+    // Pet Error
+    PET_NOT_FOUND(HttpStatus.NOT_FOUND, "PET4001", "해당하는 반려동물이 없습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
@@ -30,7 +40,7 @@ public enum ErrorStatus implements BaseErrorCode {
         return ErrorReasonDTO.builder()
                 .message(message)
                 .code(code)
-                .isSuccess(true)
+                .isSuccess(false)
                 .build();
     }
 
@@ -39,7 +49,7 @@ public enum ErrorStatus implements BaseErrorCode {
         return ErrorReasonDTO.builder()
                 .message(message)
                 .code(code)
-                .isSuccess(true)
+                .isSuccess(false)
                 .httpStatus(httpStatus)
                 .build();
     }
