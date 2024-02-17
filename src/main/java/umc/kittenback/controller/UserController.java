@@ -117,14 +117,14 @@ public class UserController {
         return ApiResponse.onSuccess(userService.checkNickname(keyword));
     }
 
-    @PostMapping("/{userId}/profile-image")
+    @PostMapping("/profile-image")
     @Operation(summary = "사용자 프로필 이미지 등록 API", description = "사용자 프로필 이미지를 등록하는 API입니다.")
     @Parameters({
             @Parameter(name = "userId", description = "사용자 고유번호 입니다."),
             @Parameter(name = "file", description = "등록할 이미지 입니다.")
     })
     public ResponseEntity<ApiResponse<ImageResponseDTO.ImageDTO>> uploadUserProfileImage (
-            @PathVariable Long userId,
+            @RequestParam("id") Long userId,
             @RequestParam("file") MultipartFile file) throws IOException {
         ImageDTO imageDTO = userService.updateProfileImage(userId, file);
 
