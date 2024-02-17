@@ -113,8 +113,9 @@ public class UserController {
 
     @GetMapping("/nickname")
     @Operation(summary = "닉네임 확인 API", description = "닉네임 중복 체크를 위한 닉네임 확인 API 입니다.")
-    public ApiResponse<Boolean> checkNickname(@RequestParam String keyword){
+    public ApiResponse<Boolean> checkNickname(@RequestParam String keyword) {
         return ApiResponse.onSuccess(userService.checkNickname(keyword));
+    }
 
     @PostMapping("/{userId}/profile-image")
     @Operation(summary = "사용자 프로필 이미지 등록 API", description = "사용자 프로필 이미지를 등록하는 API입니다.")
@@ -122,7 +123,7 @@ public class UserController {
             @Parameter(name = "userId", description = "사용자 고유번호 입니다."),
             @Parameter(name = "file", description = "등록할 이미지 입니다.")
     })
-    public ResponseEntity<ApiResponse<ImageResponseDTO.ImageDTO>> uploadUserProfileImage(
+    public ResponseEntity<ApiResponse<ImageResponseDTO.ImageDTO>> uploadUserProfileImage (
             @PathVariable Long userId,
             @RequestParam("file") MultipartFile file) throws IOException {
         ImageDTO imageDTO = userService.updateProfileImage(userId, file);

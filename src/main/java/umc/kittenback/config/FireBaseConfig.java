@@ -20,8 +20,8 @@ public class FireBaseConfig {
     public void initFirebase() {
         try {
             FileInputStream serviceAccount =
-                    new FileInputStream("src/main/resources/serviceAccountKey.json");
-            FirebaseOptions options = new FirebaseOptions.Builder()
+                    new FileInputStream("src/main/resources/charismatic-age-414606-8abc7b0a71c0.json");
+            FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl(firebaseBucket)
                     .build();
