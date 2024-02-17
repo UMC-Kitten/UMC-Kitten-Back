@@ -11,6 +11,7 @@ import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,10 +69,9 @@ public class MyPageController {
 
     @PostMapping("/change/profileImage")
     @Operation(summary = "프로필 이미지 변경 API", description = "마이 페이지 접속 시 보이는 정보에 대한 API입니다.")
-    public ResponseEntity<ApiResponse<UserDetailResponseDto>> changeProfileImage(@RequestParam("id") Long id,
-                                                                                 @RequestParam("file") MultipartFile file)
+    public ResponseEntity<ApiResponse<UserDetailResponseDto>> changeProfileImage(@ModelAttribute MyPageRequestDto.ChangeProfileImageDto req)
             throws IOException {
-        UserDetailResponseDto userDetailResponseDto = MyPageCommandService.changeProfileImage(id, file);
+        UserDetailResponseDto userDetailResponseDto = MyPageCommandService.changeProfileImage(req.getId(), req.getFile());
 
         ApiResponse<UserDetailResponseDto> apiResponse = ApiResponse.onSuccess(userDetailResponseDto);
 
