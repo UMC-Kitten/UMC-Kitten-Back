@@ -27,15 +27,7 @@ public class MyPageRequestDto {
 
     @Data
     public static class ChangeProfileImageDto {
-        private Long id;
         private MultipartFile file;
-
-        @JsonCreator
-        public ChangeProfileImageDto(@JsonProperty("id") Long id,
-                                     @JsonProperty("file") MultipartFile file) {
-            this.id = id;
-            this.file = file;
-        }
     }
 
     @Data
