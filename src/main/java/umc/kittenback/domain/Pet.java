@@ -44,4 +44,8 @@ public class Pet extends BaseEntity {
     private PetGender gender;
 
     private String notes;
+
+    public void setPetProfileImage(String petProfileImage) {
+        this.petProfileImage = petProfileImage;
+    }
 }

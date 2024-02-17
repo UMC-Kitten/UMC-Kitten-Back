@@ -35,6 +35,15 @@ public class FireBaseService {
         return mediaLink;
     }
 
+    // 펫 이미지 등록
+    public String uploadPetImage(MultipartFile file, Long petId) throws IOException {
+        String fileName = generatePetFileName(file.getOriginalFilename(), petId);
+        Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
+        Blob blob = bucket.create(fileName, file.getInputStream(), file.getContentType());
+        String mediaLink = blob.getMediaLink();
+        return mediaLink;
+    }
+
     // 게시판 img file 등록
     public String uploadFile(MultipartFile file, Long userId) throws IOException {
         Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
@@ -70,6 +79,11 @@ public class FireBaseService {
     // (프로필) 파일 이름 생성
     public String generateProfileFileName(String originalFilename, Long userId) {
         return "profile/" + userId + "/" + originalFilename;
+    }
+
+    // 펫 파일 이름 생성
+    public String generatePetFileName(String originalFilename, Long petId) {
+        return "pet/" + petId + "/" + originalFilename;
     }
 
     // (게시글) 파일 불러오기

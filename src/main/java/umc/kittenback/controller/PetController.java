@@ -4,6 +4,7 @@ import io.swagger.models.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import umc.kittenback.domain.User;
+import umc.kittenback.dto.image.ImageResponseDTO;
+import umc.kittenback.dto.image.ImageResponseDTO.ImageDTO;
 import umc.kittenback.dto.pet.PetRequestDto;
 import umc.kittenback.dto.pet.PetResponseDto;
 import umc.kittenback.exception.handler.UserHandler;
@@ -74,5 +79,21 @@ public class PetController {
                 .body(ApiResponse.onSuccess(allPetsByUserId));
     }
 
+    @PostMapping("/pet/profile-image")
+    @Operation(summary = "펫 프로필 이미지 등록 API", description = "펫 프로필 이미지를 등록하는 API입니다.")
+    @Parameters({
+            @Parameter(name = "petId", description = "펫 고유번호 입니다."),
+            @Parameter(name = "file", description = "등록할 이미지 입니다.")
+    })
+    public ResponseEntity<ApiResponse<ImageResponseDTO.ImageDTO>> uploadPetProfileImage (
+            @RequestParam("id") Long petId,
+            @RequestParam("file") MultipartFile file) throws IOException {
+        ImageDTO imageDTO = petService.updatePetImage(petId, file);
+
+        ApiResponse<ImageDTO> apiResponse = ApiResponse.onSuccess(imageDTO);
+
+        return ResponseEntity.ok()
+                .body(apiResponse);
+    }
 
 }
