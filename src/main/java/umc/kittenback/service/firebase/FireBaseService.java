@@ -64,12 +64,12 @@ public class FireBaseService {
 
     // (게시글)파일 이름 생성
     public String generatePostFileName(String originalFilename, Long userId) {
-        return "posts/" + userId + originalFilename;
+        return "posts/" + userId + "/" + originalFilename;
     }
 
     // (프로필) 파일 이름 생성
     public String generateProfileFileName(String originalFilename, Long userId) {
-        return "profile/" + userId + originalFilename;
+        return "profile/" + userId + "/" + originalFilename;
     }
 
     // (게시글) 파일 불러오기
