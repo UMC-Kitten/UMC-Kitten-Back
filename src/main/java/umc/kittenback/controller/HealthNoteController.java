@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import umc.kittenback.domain.enums.HealthNoteType;
+import umc.kittenback.dto.checkIn.HealthNote.HealthNoteListResponseDto.HealthNoteListDto;
 import umc.kittenback.dto.checkIn.HealthNote.HealthNotePetsResponseDto;
 import umc.kittenback.dto.checkIn.HealthNote.HealthNoteRequestDto.EditHealthNoteDto;
 import umc.kittenback.dto.checkIn.HealthNote.HealthNoteRequestDto.WriteHealthNoteDto;
@@ -34,6 +36,18 @@ public class HealthNoteController {
     public ApiResponse<HealthNotePetsResponseDto> getHealthNotePetsInfo(@PathVariable Long id) {
         HealthNotePetsResponseDto PetsResponseDto = HealthNoteQueryService.getHealthNotePetsInfo(id);
         return ApiResponse.onSuccess(PetsResponseDto);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "건강수첩 조회 API", description = "건강수첩 조회 시 사용되는 API.")
+    // 건강수첩에서 펫을 클릭 한 후 카테고리를 선택하여 작성한 건강수첩들을 조회할 수 있는 API
+    // Jwt에서 id값 추출 가능할 경우 Mapping 변경될 예정
+    public ApiResponse<HealthNoteListDto> showHealthNotes(@PathVariable Long id,
+                                                          @RequestParam Long petId,
+                                                          @RequestParam HealthNoteType category,
+                                                          @RequestParam Integer page) {
+        HealthNoteListDto healthNoteListDto = HealthNoteQueryService.showHealthNotes(id, petId, category, page);
+        return ApiResponse.onSuccess(healthNoteListDto);
     }
 
     @PostMapping("/write/{id}")

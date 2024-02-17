@@ -30,9 +30,11 @@ public class MyPageCommandServiceImpl implements MyPageCommandService {
     @Override
     @Transactional
     public UserDetailResponseDto changeNickname(ChangeNicknameDto req) {
+        if (userRepository.existsByNickname(req.getNickname())) { // # 예외처리 - 중복 닉네임 처리
+            throw new UserHandler(ErrorStatus.DUPLICATE_NICKNAME);
+        }
         User user = userRepository.findById(req.getId())
                 .orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
-//                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 존재하지 않습니다. id=" + id));
 
         List<PetResponseDto> petResponseDtos = user.getPets().stream()
                 .map(pet -> PetResponseDto.builder()

@@ -29,7 +29,12 @@ public enum ErrorStatus implements BaseErrorCode {
     POSTTYPE_NOT_FOUND(HttpStatus.NOT_FOUND, "POSTTYPE4001", "해당하는 게시글타입이 없습니다."),
 
     // Pet Error
-    PET_NOT_FOUND(HttpStatus.NOT_FOUND, "PET4001", "해당하는 반려동물이 없습니다.");
+    PET_NOT_FOUND(HttpStatus.NOT_FOUND, "PET4001", "해당하는 반려동물이 없습니다."),
+
+    // HealthNote 관련 에러
+    HEALTHNOTE_NOT_FOUND(HttpStatus.NOT_FOUND, "HEALTHNOTE4001", "해당 건강수첩이 존재하지 않습니다."),
+    HOSPITAL_NOT_FOUND(HttpStatus.NOT_FOUND, "HOSPITAL4002", "해당 병원이 존재하지 않습니다.");
+
 
     private final HttpStatus httpStatus;
     private final String code;

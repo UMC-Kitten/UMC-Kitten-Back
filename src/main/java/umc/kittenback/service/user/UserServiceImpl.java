@@ -87,4 +87,14 @@ public class UserServiceImpl implements UserService {
                 .mediaLink(profileImage)
                 .build();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Boolean checkNickname(String keyword) {
+        if (userRepository.existsByNickname(keyword)) { // # 예외처리 - 중복 닉네임 처리
+            throw new UserHandler(ErrorStatus.DUPLICATE_NICKNAME);
+        }
+
+        return true;
+    }
 }
