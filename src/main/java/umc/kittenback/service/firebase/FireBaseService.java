@@ -11,12 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import umc.kittenback.converter.ImageConverter;
+import umc.kittenback.converter.PostConverter;
+import umc.kittenback.domain.Post;
+import umc.kittenback.domain.PostImage;
 import umc.kittenback.dto.image.ImageResponseDTO;
+import umc.kittenback.repository.PostImageRepository;
+import umc.kittenback.repository.PostRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +32,9 @@ public class FireBaseService {
 
     @Value("${app.firebase-bucket}")
     private String firebaseBucket;
+
+    private final PostRepository postRepository;
+    private final PostImageRepository imageRepository;
 
     // 프로필 이미지 등록
     public String uploadProfileImage(MultipartFile file, Long userId) throws IOException {
@@ -56,24 +66,30 @@ public class FireBaseService {
     }
 
     // 게시판 img files 등록
-    public List<String> uploadFiles(List<MultipartFile> files, Long userId) throws IOException {
+    public List<String> uploadFiles(List<MultipartFile> files, Long postId) throws IOException {
+        Post post = postRepository.findById(postId).get();
+
         List<String> mediaLinks = new ArrayList<>();
         Bucket bucket = StorageClient.getInstance().bucket(firebaseBucket);
 
         for (MultipartFile file : files) {
             if (!file.isEmpty()) {
-                String fileName = generatePostFileName(file.getOriginalFilename(), userId);
+                String fileName = generatePostFileName(file.getOriginalFilename(), postId);
                 InputStream content = new ByteArrayInputStream(file.getBytes());
                 Blob blob = bucket.create(fileName, content, file.getContentType());
                 mediaLinks.add(blob.getMediaLink());
+                System.out.println("1");
+                imageRepository.save(ImageConverter.toPostImage(post, blob.getMediaLink()));
+                System.out.println("2");
             }
+
         }
         return mediaLinks;
     }
 
     // (게시글)파일 이름 생성
-    public String generatePostFileName(String originalFilename, Long userId) {
-        return "posts/" + userId + "/" + originalFilename;
+    public String generatePostFileName(String originalFilename, Long postId) {
+        return "posts/" + postId + "/" + originalFilename;
     }
 
     // (프로필) 파일 이름 생성
