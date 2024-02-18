@@ -4,6 +4,7 @@ import com.google.cloud.storage.Blob;
 import java.util.List;
 import java.util.stream.Collectors;
 import umc.kittenback.domain.Post;
+import umc.kittenback.domain.PostImage;
 import umc.kittenback.dto.comment.CommentResponseDTO.CommentPreviewListDTO;
 import umc.kittenback.dto.image.ImageResponseDTO;
 import umc.kittenback.dto.image.ImageResponseDTO.ImagePreviewListDTO;
@@ -12,6 +13,14 @@ import umc.kittenback.dto.post.PostResponseDTO.PostPreviewDTO;
 
 public class ImageConverter {
 
+
+    public static PostImage toPostImage(Post post, String mediaLink){
+        return PostImage.builder()
+                .image(mediaLink)
+                .post(post)
+                .build();
+
+    }
 
     public static ImageResponseDTO.ImageDTO toImagePreviewDTO(Blob blob){
         return ImageResponseDTO.ImageDTO.builder()

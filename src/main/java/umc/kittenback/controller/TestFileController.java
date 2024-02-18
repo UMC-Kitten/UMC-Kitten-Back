@@ -35,10 +35,10 @@ public class TestFileController {
         return fireBaseService.uploadFile(file, userId);
     }
 
-    @PostMapping("/{userId}/files")
-    public List<String> uploadFileList(@RequestParam("files") List<MultipartFile> files, Long userId)
+    @PostMapping("/{postId}/files")
+    public List<String> uploadFileList(@RequestParam("files") List<MultipartFile> files, Long postId)
             throws IOException {
-        return fireBaseService.uploadFiles(files, userId);
+        return fireBaseService.uploadFiles(files, postId);
     }
 
     @GetMapping("/{userId}/files")
