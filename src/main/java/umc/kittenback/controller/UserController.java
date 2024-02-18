@@ -92,9 +92,9 @@ public class UserController {
 
     @GetMapping("/apple")
     @Operation(summary = "apple 로그인 API", description = "apple 로그인 API입니다.")
-    public ResponseEntity<ApiResponse<UserLoginResponseDto>> appleLogin(@RequestParam("code") String code, @RequestParam("nonce") String nonce) {
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> appleLogin(@RequestParam("token") String identityToken, @RequestParam("nonce") String nonce) {
         // Apple 로그인 처리
-        String token = appleUserService.login(code, nonce);
+        String token = appleUserService.login(identityToken, nonce);
 
         // 헤더 설정
         HttpHeaders httpHeaders = new HttpHeaders();
