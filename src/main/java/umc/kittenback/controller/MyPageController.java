@@ -69,9 +69,9 @@ public class MyPageController {
 
     @PostMapping("/change/profileImage")
     @Operation(summary = "프로필 이미지 변경 API", description = "마이 페이지 접속 시 보이는 정보에 대한 API입니다.")
-    public ResponseEntity<ApiResponse<UserDetailResponseDto>> changeProfileImage(@RequestParam("id") Long id, @ModelAttribute MyPageRequestDto.ChangeProfileImageDto req)
+    public ResponseEntity<ApiResponse<UserDetailResponseDto>> changeProfileImage(@RequestParam("id") Long id, @RequestParam("id") MultipartFile file)
             throws IOException {
-        UserDetailResponseDto userDetailResponseDto = MyPageCommandService.changeProfileImage(id, req.getFile());
+        UserDetailResponseDto userDetailResponseDto = MyPageCommandService.changeProfileImage(id, file);
 
         ApiResponse<UserDetailResponseDto> apiResponse = ApiResponse.onSuccess(userDetailResponseDto);
 
