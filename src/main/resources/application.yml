@@ -52,3 +52,9 @@ social:
 app:
   firebase-configuration-file: ./charismatic-age-414606-8abc7b0a71c0.json
   firebase-bucket: kitten-develop-bucket
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
