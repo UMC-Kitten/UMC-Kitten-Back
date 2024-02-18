@@ -39,6 +39,7 @@ public class PostConverter {
         return PostPreviewDTO.builder()
                 .title(post.getTitle())
                 .content(post.getContent())
+                .postType(post.getPostType().name())
                 .writerNickName(post.getUser().getNickname())
                 .createdAt(post.getCreateDate())
                 .commentPreviewListDTO(commentPreviewListDTO)

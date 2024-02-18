@@ -31,6 +31,7 @@ public class PostResponseDTO {
         String title;
         String content;
 //        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "UTC")
+        String postType;
         LocalDateTime createdAt;
         String writerNickName;
         CommentResponseDTO.CommentPreviewListDTO commentPreviewListDTO;
